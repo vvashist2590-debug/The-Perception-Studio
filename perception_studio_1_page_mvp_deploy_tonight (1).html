@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Perception Studio — Perception Architecture</title>
+  <meta name="description" content="We design how you’re perceived. Perception Architecture for founders, institutions, and emerging voices." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🜂</text></svg>">
+  <!-- Tailwind CDN (fastest for MVP) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Calendly embed -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <style>
+    .glass{backdrop-filter:blur(10px);background:rgba(255,255,255,0.75)}
+  </style>
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"The Perception Studio",
+    "url":"https://theperception.studio",
+    "logo":"https://theperception.studio/logo.png",
+    "sameAs":["https://www.linkedin.com/company/the-perception-studio","https://www.instagram.com/theperception.studio/"],
+    "description":"Perception Architecture for founders, institutions, and emerging voices. We design how people respond to you.",
+    "founder": {"@type":"Person","name":"Vivek Vashist"}
+  }
+  </script>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-zinc-50 to-zinc-200 text-zinc-900">
+  <!-- Header/Nav -->
+  <header class="sticky top-0 z-30 border-b border-zinc-200 bg-white/70 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <a href="#" class="font-semibold tracking-tight">The Perception Studio</a>
+      <nav class="hidden sm:flex gap-6 text-sm">
+        <a href="#work" class="hover:opacity-70">Work</a>
+        <a href="#services" class="hover:opacity-70">Services</a>
+        <a href="#about" class="hover:opacity-70">About</a>
+        <a href="#contact" class="hover:opacity-70">Contact</a>
+      </nav>
+      <button onclick="Calendly.initPopupWidget({url: 'https://calendly.com/vvashist2590'});return false;" class="rounded-2xl border border-zinc-300 px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">Book a 30‑min call</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden">
+    <div class="mx-auto max-w-6xl px-4 py-20">
+      <div class="grid md:grid-cols-2 items-center gap-10">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-semibold leading-tight">We design perception.<br/>So people respond.</h1>
+          <p class="mt-4 text-lg text-zinc-700">PR is surface. We work at the layer beneath it — the human triggers that make ideas travel. Campaigns that look like marketing wins, but act as Trojan horses for dignity, clarity, and trust.</p>
+          <div class="mt-6 flex gap-3">
+            <a href="#contact" class="rounded-2xl bg-zinc-900 text-white px-5 py-3 text-sm">Start a Perception Audit</a>
+            <button onclick="Calendly.initPopupWidget({url: 'https://calendly.com/vvashist2590'});return false;" class="rounded-2xl border border-zinc-300 px-5 py-3 text-sm">Book a call</button>
+          </div>
+          <p class="mt-3 text-xs text-zinc-500">Quick MVP — live tonight. Replace placeholders + deploy (see instructions below).</p>
+        </div>
+        <div class="glass rounded-3xl p-6 shadow-sm">
+          <h3 class="font-medium">Signals we strengthen</h3>
+          <ul class="mt-3 grid grid-cols-2 gap-3 text-sm">
+            <li class="rounded-xl border border-zinc-200 p-3">Expert Signals</li>
+            <li class="rounded-xl border border-zinc-200 p-3">Trust</li>
+            <li class="rounded-xl border border-zinc-200 p-3">Story</li>
+            <li class="rounded-xl border border-zinc-200 p-3">Identity</li>
+            <li class="rounded-xl border border-zinc-200 p-3">Activity</li>
+            <li class="rounded-xl border border-zinc-200 p-3">Community</li>
+          </ul>
+          <p class="mt-3 text-xs text-zinc-600">Mapped to a simple dashboard + rituals your team can run.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credibility band -->
+  <section class="border-y border-zinc-200 bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-6 text-xs text-zinc-600 flex flex-wrap items-center gap-4">
+      <span>Seen in:</span>
+      <a class="font-medium underline hover:no-underline" href="https://timesofindia.indiatimes.com/city/gurgaon/gurgaon-man-chosen-from-over-a-lakh-applicants-for-the-month-long-antarctic-sabbatical/articleshow/72023081.cms" target="_blank" rel="noopener">Times of India</a>
+      <span>•</span>
+      <a class="font-medium underline hover:no-underline" href="https://yourstory.com/socialstory/2019/11/teach-for-india-fellow-learning-startup-imbue-education" target="_blank" rel="noopener">YourStory</a>
+      <span>•</span>
+      <a class="font-medium underline hover:no-underline" href="https://www.thehindubusinessline.com/info-tech/love-simulated-why-some-are-turning-to-ai-for-romance/article69835095.ece" target="_blank" rel="noopener">BusinessLine</a>
+    </div>
+  </section>
+
+  <!-- Work / 3 cards -->
+  <section id="work" class="mx-auto max-w-6xl px-4 py-16">
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
+        <h3 class="font-medium">Education brand → National positioning</h3>
+        <p class="mt-2 text-sm text-zinc-600">Built a K–12 entrepreneurship narrative and media engine. From a local launch to national relevance.</p>
+      </article>
+      <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
+        <h3 class="font-medium">Healthcare → Trust architecture</h3>
+        <p class="mt-2 text-sm text-zinc-600">Translated complex care into human language. Designed stakeholder pathways that reduce anxiety.</p>
+      </article>
+      <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
+        <h3 class="font-medium">Real estate → Luxury redefined</h3>
+        <p class="mt-2 text-sm text-zinc-600">Founder‑led storytelling + global media map. From product to philosophy.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="border-y border-zinc-200 bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-2xl font-semibold">What we do</h2>
+      <div class="mt-6 grid md:grid-cols-3 gap-6 text-sm">
+        <div class="rounded-2xl border border-zinc-200 p-5">
+          <h3 class="font-medium">Perception Audit</h3>
+          <p class="mt-2 text-zinc-600">How you’re seen vs how you should be seen. Outputs you can use tomorrow.</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 p-5">
+          <h3 class="font-medium">Narrative & Media Engine</h3>
+          <p class="mt-2 text-zinc-600">Placement strategy, authored articles, journalist mapping. Momentum by design.</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 p-5">
+          <h3 class="font-medium">Founder Visibility</h3>
+          <p class="mt-2 text-zinc-600">LinkedIn system, stages, podcasts. Visibility that compounds, not shouts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="mx-auto max-w-6xl px-4 py-16">
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h2 class="text-2xl font-semibold">Why us</h2>
+        <p class="mt-3 text-zinc-700">We don’t spray messages. We design responses. Every move is rooted in a human truth — desire, fear, status, belonging — used ethically to build trust. No theatre. Real levers.</p>
+      </div>
+      <div class="rounded-2xl border border-zinc-200 p-5 bg-white">
+        <h3 class="font-medium">Founder</h3>
+        <p class="mt-2 text-sm text-zinc-600">Vivek Vashist — Perception Architect. Featured in national media; mentored leaders across industries; built systems for education, healthcare, and real estate.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="border-t border-zinc-200 bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-2xl font-semibold">Start a conversation</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-8">
+        <!-- Formspree form; replace FORM_ID below -->
+        <form action="https://formspree.io/f/FORM_ID" method="POST" class="rounded-2xl border border-zinc-200 p-5 space-y-3">
+          <input type="hidden" name="_subject" value="New enquiry — The Perception Studio" />
+          <label class="block text-sm">Name
+            <input required name="name" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2"/>
+          </label>
+          <label class="block text-sm">Email
+            <input required type="email" name="email" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2"/>
+          </label>
+          <label class="block text-sm">What do you need?
+            <textarea name="message" rows="4" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2" placeholder="Perception audit / visibility / launch / media architecture"></textarea>
+          </label>
+          <button class="rounded-2xl bg-zinc-900 text-white px-5 py-3 text-sm">Send</button>
+          <p class="text-xs text-zinc-500">Or WhatsApp: <a class="underline" href="https://wa.me/918800686480">+91‑YOUR‑NUMBER</a></p>
+        </form>
+        <!-- Calendly inline (swap URL) -->
+        <div class="rounded-2xl border border-zinc-200 p-5">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/vvashist2590" style="min-width:320px;height:650px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-zinc-200">
+    <div class="mx-auto max-w-6xl px-4 py-8 text-xs text-zinc-600 flex flex-wrap items-center gap-4">
+      <span>© <span id="year"></span> The Perception Studio</span>
+      <span>•</span>
+      <a href="mailto:hello@theperception.studio" class="underline">hello@theperception.studio</a>
+      <span>•</span>
+      <a href="/privacy.html" class="underline">Privacy</a>
+      <span>•</span>
+      <a href="https://www.instagram.com/theperception.studio/" class="underline" target="_blank" rel="noopener">Instagram</a>
+      <span>•</span>
+      <a href="https://www.linkedin.com/company/the-perception-studio" class="underline" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear()
+  </script>
+</body>
+</html>

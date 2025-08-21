@@ -663,7 +663,8 @@
       form && form.addEventListener('submit', async (e)=>{
         e.preventDefault();
         ok.style.display = 'none'; err.style.display = 'none';
-        if(!validateCurrentStep()) return;
+        if (!validateCurrentStep()) return;
+if (!validateAllSteps()) { err.style.display = 'block'; return; }
         const data = new FormData(form);
         try{
           const res = await fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} });

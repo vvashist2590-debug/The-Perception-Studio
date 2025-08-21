@@ -615,65 +615,29 @@
     })();
 
     // ---------- Multi-step form logic (scoped to #brief) ----------
-    (function(){
-      const brief = document.getElementById('brief');
-      if(!brief) return;
-      const form = brief.querySelector('#multiForm');
-      const steps = [...brief.querySelectorAll('.step')];
-      const chips = [...brief.querySelectorAll('.chip')];
-      const bar = brief.querySelector('#bar');
-      const ok = brief.querySelector('#ok');
-      const err = brief.querySelector('#err');
-      const prevBtn = brief.querySelector('#prev');
-      const nextBtn = brief.querySelector('#next');
-      const submitBtn = brief.querySelector('#submit');
-      let i = 0;
+(function(){
+  const brief = document.getElementById('brief');
+  if (!brief) return;
 
-      function setStep(n){
-        i = Math.max(0, Math.min(steps.length-1, n));
-        steps.forEach((s,idx)=>s.classList.toggle('active', idx===i));
-        chips.forEach((c,idx)=>c.classList.toggle('active', idx===i));
-        const pct = Math.round(((i+1)/steps.length)*100);
-        bar.style.width = pct + '%';
-        bar.parentElement.setAttribute('aria-valuenow', pct);
-        prevBtn.disabled = i===0;
-        nextBtn.style.display = (i === steps.length-1) ? 'none' : '';
-        submitBtn.style.display = (i === steps.length-1) ? '' : 'none';
-        ok.style.display = 'none'; err.style.display = 'none';
-        const firstInput = steps[i].querySelector('input, textarea, select');
-        if(firstInput) firstInput.focus({preventScroll:true});
-      }
-      function validateCurrentStep(){
-        let valid = true;
-        const fields = steps[i].querySelectorAll('input, textarea, select');
-        fields.forEach(el=>{
-          if(el.dataset.requireOne === 'communication'){
-            const anyChecked = [...steps[i].querySelectorAll('input[data-require-one="communication"]')].some(cb=>cb.checked);
-            if(!anyChecked){ valid = false; steps[i].querySelector('input[data-require-one="communication"]').focus(); }
-          }
-          if(valid && typeof el.reportValidity === 'function' && el.offsetParent !== null){
-            if(!el.reportValidity()) valid = false;
-          }
-        });
-        return valid;
-      }
-      prevBtn && prevBtn.addEventListener('click', ()=> setStep(i-1));
-      nextBtn && nextBtn.addEventListener('click', ()=>{ if(validateCurrentStep()) setStep(i+1); });
+  const form = brief.querySelector('#multiForm');
+  const steps = [...brief.querySelectorAll('.step')];
+  const chips = [...brief.querySelectorAll('.chip')];
+  const bar = brief.querySelector('#bar');
+  const ok = brief.querySelector('#ok');
+  const err = brief.querySelector('#err');
+  const prevBtn = brief.querySelector('#prev');
+  const nextBtn = brief.querySelector('#next');
+  const submitBtn = brief.querySelector('#submit');
+  let i = 0;
 
-      form && form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        ok.style.display = 'none'; err.style.display = 'none';
-        if (!validateCurrentStep()) return;
-        const data = new FormData(form);
-        try{
-          const res = await fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} });
-          if(res.ok){
-            form.reset(); setStep(0); ok.style.display='block'; window.scrollTo({top:0, behavior:'smooth'});
-          } else { err.style.display='block'; window.scrollTo({top:0, behavior:'smooth'}); }
-        }catch(_e){ err.style.display='block'; window.scrollTo({top:0, behavior:'smooth'}); }
-      });
-      setStep(0);
-    })();
-  </script>
-</body>
-</html>
+  function setStep(n){
+    i = Math.max(0, Math.min(steps.length - 1, n));
+    steps.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    chips.forEach((c, idx) => c.classList.toggle('active', idx === i));
+    const pct = Math.round(((i + 1) / steps.length) * 100);
+    bar.style.width = pct + '%';
+    bar.parentElement.setAttribute('aria-valuenow', pct);
+    prevBtn.disabled = i === 0;
+    nextBtn.style.display = (i === steps.length - 1) ? 'none' : '';
+    submitBtn.style.display = (i === steps.length - 1) ? '' : 'none';
+    ok.style.display = 'no

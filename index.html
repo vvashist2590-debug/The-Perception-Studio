@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,6 +33,15 @@
   <link rel="dns-prefetch" href="https://assets.calendly.com">
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  /* Calendly should never overflow grid columns */
+#calendly-container,
+#calendly-container > iframe,
+.calendly-inline-widget {
+  width: 100% !important;
+  min-width: 0 !important;
+  display: block !important;
+}
+
 
   <!-- Tiny site CSS -->
   <style>
@@ -282,7 +292,7 @@
         <p class="mt-1 text-sm text-zinc-600">Prefer a fuller brief? <a class="underline" href="#brief">Fill the Collaborator Entry Brief</a>.</p>
         <div class="mt-6 grid md:grid-cols-2 gap-8">
           <!-- Simple contact form (uses your own Formspree ID later if you want) -->
-          <form action="https://formspree.io/f/FORM_ID" method="POST" class="rounded-2xl border border-zinc-200 p-5 space-y-3">
+          <form action="https://formspree.io/f/mblkvewe" method="POST" class="rounded-2xl border border-zinc-200 p-5 space-y-3 min-w-0">
             <input type="hidden" name="_subject" value="New enquiry — The Perception Studio" />
             <label class="block text-sm">Name
               <input required name="name" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2"/>
@@ -307,9 +317,13 @@
           </form>
 
           <!-- Calendly (lazy-loaded) -->
-          <div class="rounded-2xl border border-zinc-200 p-5">
-            <div id="calendly-container" class="rounded-2xl" data-url="https://calendly.com/vvashist2590" style="min-width:320px;height:650px;">
-              <div class="h-full w-full grid place-items-center text-sm text-zinc-500">Loading scheduler…</div>
+
+<div class="rounded-2xl border border-zinc-200 p-5 min-w-0">
+  <div id="calendly-container"
+       class="rounded-2xl overflow-hidden min-w-0"
+       data-url="https://calendly.com/vvashist2590"
+       style="height:700px; width:100%;">
+    <div class="h-full w-full grid place-items-center text-sm text-zinc-500">Loading scheduler…</div>
             </div>
           </div>
         </div>
@@ -528,29 +542,43 @@
     document.addEventListener('DOMContentLoaded', showViewFromHash);
 
     // Calendly lazy-load (only on home view when container becomes visible)
-    (function lazyCalendly(){
-      const el = document.getElementById('calendly-container');
-      if(!el) return;
-      function initInline(){
-        if(window.Calendly && typeof Calendly.initInlineWidget === 'function'){
-          Calendly.initInlineWidget({ url: el.dataset.url, parentElement: el });
-          return true;
-        }
-        return false;
+    
+    
+
+  (function lazyCalendly(){
+    const el = document.getElementById('calendly-container');
+    if(!el) return;
+
+    let started = false;
+    function initInline(){
+      if(started) return true;
+      if(window.Calendly && typeof Calendly.initInlineWidget === 'function'){
+        // Clear placeholder before injecting iframe
+        el.innerHTML = '';
+        Calendly.initInlineWidget({ url: el.dataset.url, parentElement: el });
+        started = true;
+        return true;
       }
-      const onVisible = ()=>{
-        const ok = initInline();
-        if(ok) return;
-        const t = setInterval(()=>{ if(initInline()) clearInterval(t); }, 150);
-      };
-      if('IntersectionObserver' in window){
-        const io = new IntersectionObserver((entries)=>{
-          entries.forEach(entry=>{
-            if(entry.isIntersecting){ onVisible(); io.disconnect(); }
-          });
+      return false;
+    }
+
+    function onVisible(){
+      if(initInline()) return;
+      // Poll until Calendly.js is ready
+      const t = setInterval(()=>{ if(initInline()) clearInterval(t); }, 150);
+    }
+
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){ onVisible(); io.disconnect(); }
         });
-        io.observe(el);
-      } else { onVisible(); }
+      }, { rootMargin: '200px 0px' }); // start a bit earlier
+      io.observe(el);
+    } else {
+      onVisible();
+    }
+
     })();
 
     // Compass bearings + copy (and no stray "RE" anywhere)

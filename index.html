@@ -6,11 +6,6 @@
   <title>The Perception Studio — Perception Architecture</title>
   <meta name="description" content="We design how you’re perceived. Perception Architecture for founders, institutions, and emerging voices." />
 
-  <!-- Favicon (kept emoji fallback) + app icons -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🜂</text></svg>">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-
   <!-- Canonical + Social cards -->
   <link rel="canonical" href="https://theperception.studio/" />
   <meta property="og:type" content="website">
@@ -24,19 +19,24 @@
   <meta name="twitter:image" content="https://theperception.studio/og-image.jpg">
   <meta name="theme-color" content="#0a0a0a">
 
+  <!-- Favicon (emoji fallback) + minimal PWA hooks (optional) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🜂</text></svg>">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
   <!-- Tailwind (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Calendly (preconnect + async widget) -->
+  <!-- Calendly -->
   <link rel="preconnect" href="https://assets.calendly.com" crossorigin>
   <link rel="dns-prefetch" href="https://assets.calendly.com">
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
-  <!-- Tiny CSS -->
+  <!-- Tiny site CSS -->
   <style>
     .glass{backdrop-filter:blur(10px);background:rgba(255,255,255,0.75)}
-    /* Compass chips */
+    /* Compass */
     .compass-chip{
       position:absolute; white-space:nowrap; background:#fff;
       border:1px solid rgba(0,0,0,.15); border-radius:9999px;
@@ -44,16 +44,65 @@
       box-shadow:0 1px 0 rgba(0,0,0,.03);
     }
     .compass-chip:focus-visible{ outline:2px solid #3b82f6; outline-offset:2px }
-    /* Center pulse */
     #compass-center::after{
       content:""; position:absolute; inset:-6px; border-radius:9999px;
       border:1px solid rgba(0,0,0,.08); animation:compassPulse 2.4s infinite;
     }
-    @keyframes compassPulse{ 0%{ transform:scale(1); opacity:.9 }
-      70%{ transform:scale(1.06); opacity:0 } 100%{ opacity:0 } }
-    /* Needle transition */
+    @keyframes compassPulse{ 0%{ transform:scale(1); opacity:.9 } 70%{ transform:scale(1.06); opacity:0 } 100%{ opacity:0 } }
     #compass-needle{ transition: transform .45s cubic-bezier(.2,.8,.2,1) }
     #compass.pinned #compass-needle{ transition: transform .15s ease-out }
+
+    /* --------- Collaborator Brief view (scoped styles) --------- */
+    /* palette + structure */
+    #brief{
+      --bg:#F5F2ED; --card:#FFFFFF; --text:#3E3E3E; --muted:#6b7280;
+      --accent:#2E3B32; --accent-weak:#7E8F7B; --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.06);
+      background:var(--bg); color:var(--text);
+    }
+    #brief .wrap{max-width:960px; margin:48px auto; padding:0 20px}
+    #brief header h1{margin:0 0 6px; font-size:28px; line-height:1.2}
+    #brief header p{margin:0; color:var(--muted)}
+    #brief .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:28px; margin-top:18px}
+
+    /* progress */
+    #brief .progress{height:10px; background:#e8ece8; border-radius:999px; overflow:hidden; margin:8px 0 18px}
+    #brief .bar{height:100%; width:0%; background:var(--accent); transition:width .25s ease}
+    #brief .steps-head{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px}
+    #brief .chip{font-size:12px; padding:6px 10px; border-radius:999px; background:#eef1ee; color:#55625a}
+    #brief .chip.active{background:var(--accent); color:#fff}
+    #brief .step{display:none; animation:fade .18s ease}
+    #brief .step.active{display:block}
+    @keyframes fade{from{opacity:.5; transform:translateY(3px)} to{opacity:1; transform:none}}
+
+    /* form */
+    #brief form{display:grid; gap:18px}
+    #brief .row{display:grid; gap:14px}
+    @media (min-width:760px){
+      #brief .row.grid-2{grid-template-columns:1fr 1fr}
+      #brief .row.grid-3{grid-template-columns:1fr 1fr 1fr}
+    }
+    #brief label{font-size:14px; color:var(--muted); display:block; margin-bottom:6px}
+    #brief input[type="text"], #brief input[type="email"], #brief input[type="url"], #brief input[type="file"], #brief textarea{
+      width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:12px; background:#fff; font:inherit; color:inherit; outline:none; transition:border .18s, box-shadow .18s;
+    }
+    #brief textarea{min-height:110px; resize:vertical}
+    #brief input:focus, #brief textarea:focus{border-color:var(--accent); box-shadow:0 0 0 4px rgba(46,59,50,.12)}
+    #brief fieldset{border:1px solid #eef0f2; border-radius:12px; padding:14px 16px}
+    #brief legend{padding:0 6px; color:var(--muted); font-size:13px}
+    #brief .checks{display:grid; gap:8px; margin-top:6px}
+    #brief .checks label{display:flex; align-items:center; gap:10px; color:var(--text)}
+    #brief .muted{color:var(--muted); font-size:13px}
+
+    /* buttons & alerts */
+    #brief .actions{display:flex; justify-content:space-between; gap:12px; margin-top:6px}
+    #brief .left{display:flex; gap:12px}
+    #brief .btn{appearance:none; border:0; background:var(--accent); color:#fff; padding:12px 18px; border-radius:14px; font-weight:600; cursor:pointer}
+    #brief .btn.secondary{background:#e7ebe7; color:#1f2a24}
+    #brief .btn:disabled{opacity:.6; cursor:not-allowed}
+    #brief .alert{display:none; padding:12px 14px; border-radius:12px; font-size:14px; margin-bottom:6px}
+    #brief .alert.ok{background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0}
+    #brief .alert.err{background:#fef2f2; color:#991b1b; border:1px solid #fecaca}
+    #brief ul.hints{margin:.25rem 0 0 1.2rem; color:var(--muted); font-size:13px}
   </style>
 
   <!-- JSON-LD -->
@@ -73,264 +122,463 @@
     "foundingDate":"2025-01-01",
     "email":"hello@theperception.studio",
     "contactPoint":[{
-      "@type":"ContactPoint",
-      "contactType":"inquiries",
-      "email":"hello@theperception.studio",
-      "telephone":"+91-8800686480",
-      "areaServed":"IN"
+      "@type":"ContactPoint","contactType":"inquiries","email":"hello@theperception.studio","telephone":"+91-8800686480","areaServed":"IN"
     }]
   }
   </script>
 </head>
+
 <body class="min-h-screen bg-gradient-to-b from-zinc-50 to-zinc-200 text-zinc-900">
-  <!-- Header -->
-  <header class="sticky top-0 z-30 border-b border-zinc-200 bg-white/70 backdrop-blur">
-    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-      <a href="#" class="font-semibold tracking-tight">The Perception Studio</a>
-      <nav class="hidden sm:flex gap-6 text-sm" aria-label="Primary">
-        <a href="#work" class="hover:opacity-70">Work</a>
-        <a href="#services" class="hover:opacity-70">Services</a>
-        <a href="#about" class="hover:opacity-70">About</a>
-        <a href="#contact" class="hover:opacity-70">Contact</a>
-      </nav>
-      <button onclick="Calendly.initPopupWidget({url: 'https://calendly.com/vvashist2590'});return false;" class="rounded-2xl border border-zinc-300 px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">Book a 30‑min call</button>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="relative isolate overflow-hidden">
-    <div class="mx-auto max-w-6xl px-4 py-20">
-      <div class="grid md:grid-cols-2 items-center gap-10">
-        <div>
-          <h1 class="text-4xl md:text-5xl font-semibold leading-tight">We design perception.<br/>So people respond.</h1>
-          <p class="mt-3 text-base text-zinc-600">If you’ve felt your work deserves more recognition than it gets — you’re in the right place.</p>
-          <p class="mt-2 text-lg text-zinc-700">Most good work goes unseen. We make sure yours doesn't — not through noise, but through signals people can’t ignore. We work beneath PR's surface, at the human triggers that make ideas travel.</p>
-          <div class="mt-6 flex gap-3">
-            <a href="#contact" class="rounded-2xl bg-zinc-900 text-white px-5 py-3 text-sm">Know how you’re really seen — start your Perception Audit</a>
-            <button onclick="Calendly.initPopupWidget({url: 'https://calendly.com/vvashist2590'});return false;" class="rounded-2xl border border-zinc-300 px-5 py-3 text-sm">Book a call</button>
-          </div>
-        </div>
-
-        <!-- Perception Compass (interactive) -->
-        <div class="glass rounded-3xl p-6 shadow-sm" id="compass">
-          <h3 class="font-medium" id="compass-title">Perception Compass</h3>
-          <p class="mt-2 text-sm text-zinc-600">Six signals that work together. Move one, all respond.</p>
-
-          <div class="mt-4 relative mx-auto" style="height:300px" aria-labelledby="compass-title">
-            <!-- Center: Response (pulse + reset) -->
-            <div id="compass-center"
-                 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-300 px-4 py-2 text-xs bg-white relative select-none focus:outline-none"
-                 role="button" tabindex="0" aria-label="Reset compass needle">Response</div>
-
-            <!-- Needle (SVG) -->
-            <svg id="compass-needle" class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <g transform="translate(50,50)">
-                <polygon points="0,-34 2,-28 0,-30 -2,-28" fill="currentColor" class="text-zinc-700"></polygon>
-                <rect x="-0.6" y="-28" width="1.2" height="30" rx="0.6" class="fill-zinc-700"></rect>
-                <circle r="2.2" class="fill-white stroke-zinc-700" stroke-width="0.6"></circle>
-              </g>
-              <line x1="50" y1="4" x2="50" y2="96" stroke="rgba(0,0,0,0.08)"/>
-              <line x1="4" y1="50" x2="96" y2="50" stroke="rgba(0,0,0,0.08)"/>
-            </svg>
-
-            <!-- Hotspots -->
-            <button class="compass-chip" data-signal="Expert Signals" style="left:50%;top:8%" aria-label="Expert Signals">Expert Signals</button>
-            <button class="compass-chip" data-signal="Trust"           style="right:6%;top:50%;transform:translateY(-50%)" aria-label="Trust">Trust</button>
-            <button class="compass-chip" data-signal="Story"           style="left:50%;bottom:8%" aria-label="Story">Story</button>
-            <button class="compass-chip" data-signal="Identity"        style="left:6%;top:50%;transform:translateY(-50%)" aria-label="Identity">Identity</button>
-            <button class="compass-chip" data-signal="Activity"        style="left:12%;top:14%" aria-label="Activity">Activity</button>
-            <button class="compass-chip" data-signal="Community"       style="right:12%;bottom:14%" aria-label="Community">Community</button>
-          </div>
-
-          <p id="compass-caption" class="mt-3 text-xs text-zinc-600" aria-live="polite">Hover or tap a signal to see how it moves response.</p>
-          <p class="mt-1 text-[11px] text-zinc-500">Pick a direction for the next 2 weeks. We’ll ship a tiny ritual and measure the response.</p>
-        </div>
+  <!-- ---------------- Home View ---------------- -->
+  <div id="home">
+    <!-- Header -->
+    <header class="sticky top-0 z-30 border-b border-zinc-200 bg-white/70 backdrop-blur">
+      <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+        <a href="#" class="font-semibold tracking-tight">The Perception Studio</a>
+        <nav class="hidden sm:flex gap-6 text-sm" aria-label="Primary">
+          <a href="#work" class="hover:opacity-70">Work</a>
+          <a href="#services" class="hover:opacity-70">Services</a>
+          <a href="#about" class="hover:opacity-70">About</a>
+          <a href="#contact" class="hover:opacity-70">Contact</a>
+          <a href="#brief" class="hover:opacity-70">Collaborate</a>
+        </nav>
+        <button onclick="Calendly.initPopupWidget({url: 'https://calendly.com/vvashist2590'});return false;" class="rounded-2xl border border-zinc-300 px-4 py-2 text-sm hover:bg-zinc-900 hover:text-white">Book a 30-min call</button>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- Proof strip -->
-  <section class="border-y border-zinc-200 bg-white">
-    <div class="mx-auto max-w-6xl px-4 py-6 text-xs text-zinc-600 flex flex-wrap items-center gap-4">
-      <div class="w-full">
-        <p class="text-sm text-zinc-700 mb-2">Featured in Times of India, YourStory, and BusinessLine — trusted by education innovators, healthcare leaders, and luxury founders.</p>
-        <div class="text-xs text-zinc-600 flex flex-wrap items-center gap-4">
-          <span>Seen in:</span>
-          <a class="font-medium underline hover:no-underline" href="https://timesofindia.indiatimes.com/city/gurgaon/gurgaon-man-chosen-from-over-a-lakh-applicants-for-the-month-long-antarctic-sabbatical/articleshow/72023081.cms" target="_blank" rel="noopener" aria-label="Opens Times of India article in a new tab">Times of India</a>
-          <span>•</span>
-          <a class="font-medium underline hover:no-underline" href="https://yourstory.com/socialstory/2019/11/teach-for-india-fellow-learning-startup-imbue-education" target="_blank" rel="noopener" aria-label="Opens YourStory article in a new tab">YourStory</a>
-          <span>•</span>
-          <a class="font-medium underline hover:no-underline" href="https://www.thehindubusinessline.com/info-tech/love-simulated-why-some-are-turning-to-ai-for-romance/article69835095.ece" target="_blank" rel="noopener" aria-label="Opens BusinessLine article in a new tab">BusinessLine</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Work -->
-  <section id="work" class="mx-auto max-w-6xl px-4 py-16">
-    <div class="grid md:grid-cols-3 gap-6">
-      <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
-        <h3 class="font-medium">Education — From local launch → national relevance</h3>
-        <p class="mt-2 text-sm text-zinc-600"><strong>Before:</strong> Great program, low visibility beyond the city.</p>
-        <p class="text-sm text-zinc-600"><strong>After:</strong> Narrative + media engine; cited by leading educators and policy conversations.</p>
-        <p class="text-sm text-zinc-700"><strong>Outcome:</strong> Applications and partnerships grew; parents outside the city started asking for entry.</p>
-      </article>
-      <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
-        <h3 class="font-medium">Healthcare — From jargon → trust pathway</h3>
-        <p class="mt-2 text-sm text-zinc-600"><strong>Before:</strong> Confusing language, anxious patients.</p>
-        <p class="text-sm text-zinc-600"><strong>After:</strong> Clear care flows and human messaging that reduced drop‑offs.</p>
-        <p class="text-sm text-zinc-700"><strong>Outcome:</strong> Patients understood next steps faster; fewer disengaged before first consult.</p>
-      </article>
-      <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
-        <h3 class="font-medium">Real estate — From product → philosophy</h3>
-        <p class="mt-2 text-sm text-zinc-600"><strong>Before:</strong> Features without a story.</p>
-        <p class="text-sm text-zinc-600"><strong>After:</strong> Founder‑led positioning and global media map; luxury reframed as stillness and craft.</p>
-        <p class="text-sm text-zinc-700"><strong>Outcome:</strong> Higher‑quality inbound; international partners referenced the philosophy verbatim.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Services / Rituals -->
-  <section id="services" class="border-y border-zinc-200 bg-white">
-    <div class="mx-auto max-w-6xl px-4 py-16">
-      <h2 class="text-2xl font-semibold">What we do (Rituals)</h2>
-      <div class="mt-6 grid md:grid-cols-3 gap-6 text-sm">
-        <div class="rounded-2xl border border-zinc-200 p-5">
-          <h3 class="font-medium">Perception Audit</h3>
-          <p class="mt-2 text-zinc-600">Your mirror: how you’re seen vs how you should be seen. We deliver a one‑page map + actions you can use tomorrow.</p>
-        </div>
-        <div class="rounded-2xl border border-zinc-200 p-5">
-          <h3 class="font-medium">Narrative & Media Engine</h3>
-          <p class="mt-2 text-zinc-600">Your signal fire: placement strategy, authored articles, journalist mapping. A monthly rhythm that compounds.</p>
-        </div>
-        <div class="rounded-2xl border border-zinc-200 p-5">
-          <h3 class="font-medium">Founder Visibility</h3>
-          <p class="mt-2 text-zinc-600">Your stage: LinkedIn system, stages, podcasts. Visibility that builds trust — not noise.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="mx-auto max-w-6xl px-4 py-16">
-    <div class="grid md:grid-cols-2 gap-8">
-      <div>
-        <h2 class="text-2xl font-semibold">Why us</h2>
-        <p class="mt-3 text-zinc-700">We don’t spray messages. We design responses. Every move is rooted in a human truth — desire, fear, status, belonging — used ethically to build trust. No theatre. Real levers.</p>
-      </div>
-      <div class="rounded-2xl border border-zinc-200 p-5 bg-white">
-        <h3 class="font-medium">Founder</h3>
-        <p class="mt-2 text-sm text-zinc-600">Built on experience across Goldman Sachs, Teach For India, National Geographic, PR leadership, and global expeditions — united by one question: <em>How do humans respond?</em> From boardrooms to Antarctic ice, the pattern was the same: outcomes followed perception. That’s the work we do here.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="border-t border-zinc-200 bg-white">
-    <div class="mx-auto max-w-6xl px-4 py-16">
-      <h2 class="text-2xl font-semibold">Start a conversation</h2>
-      <p class="mt-2 text-sm text-zinc-600">Tell us where you’re stuck. We’ll listen first.</p>
-      <div class="mt-6 grid md:grid-cols-2 gap-8">
-        <!-- TODO: set your real Formspree endpoint ID -->
-        <form action="https://formspree.io/f/xdkdrvdk" method="POST" class="rounded-2xl border border-zinc-200 p-5 space-y-3">
-          <input type="hidden" name="_subject" value="New enquiry — The Perception Studio" />
-          <label class="block text-sm">Name
-            <input required name="name" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2"/>
-          </label>
-          <label class="block text-sm">Email
-            <input required type="email" name="email" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2"/>
-          </label>
-
-          <fieldset class="block text-sm">
-            <legend class="mb-2">What do you need?</legend>
-            <div class="mt-1 space-y-2">
-              <label class="flex items-center gap-2">
-                <input type="checkbox" name="needs" value="Perception Audit" class="rounded"> Perception Audit
-              </label>
-              <label class="flex items-center gap-2">
-                <input type="checkbox" name="needs" value="Narrative & Media Engine" class="rounded"> Narrative & Media Engine
-              </label>
-              <label class="flex items-center gap-2">
-                <input type="checkbox" name="needs" value="Founder Visibility" class="rounded"> Founder Visibility
-              </label>
-              <label class="flex items-center gap-2">
-                <input type="checkbox" name="needs" value="Other" class="rounded"> Other
-              </label>
+    <!-- Hero -->
+    <section class="relative isolate overflow-hidden">
+      <div class="mx-auto max-w-6xl px-4 py-20">
+        <div class="grid md:grid-cols-2 items-center gap-10">
+          <div>
+            <h1 class="text-4xl md:text-5xl font-semibold leading-tight">We design perception.<br/>So people respond.</h1>
+            <p class="mt-3 text-base text-zinc-600">If you’ve felt your work deserves more recognition than it gets — you’re in the right place.</p>
+            <p class="mt-2 text-lg text-zinc-700">Most good work goes unseen. We make sure yours doesn't — not through noise, but through signals people can’t ignore. We work beneath PR's surface, at the human triggers that make ideas travel.</p>
+            <div class="mt-6 flex gap-3">
+              <a href="#contact" class="rounded-2xl bg-zinc-900 text-white px-5 py-3 text-sm">Not sure how you’re really seen? Get your Perception Audit — clarity you can use tomorrow.</a>
+              <button onclick="Calendly.initPopupWidget({url: 'https://calendly.com/vvashist2590'});return false;" class="rounded-2xl border border-zinc-300 px-5 py-3 text-sm">Book a call</button>
             </div>
-          </fieldset>
+          </div>
 
-          <label class="block text-sm mt-3">Anything else?
-            <textarea name="message" rows="3" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2" placeholder="A few lines are enough."></textarea>
-          </label>
-          <button class="rounded-2xl bg-zinc-900 text-white px-5 py-3 text-sm">Send</button>
-          <p class="text-xs text-zinc-500">Call / WhatsApp: <a class="underline" href="tel:+918800686480">+91 8800686480</a></p>
-        </form>
+          <!-- Perception Compass (interactive; no stray 'RE') -->
+          <div class="glass rounded-3xl p-6 shadow-sm" id="compass">
+            <h3 class="font-medium" id="compass-title">Perception Compass</h3>
+            <p class="mt-2 text-sm text-zinc-600">Six signals that work together. Move one, all respond.</p>
 
-        <!-- Calendly (lazy-loaded) -->
-        <div class="rounded-2xl border border-zinc-200 p-5">
-          <div id="calendly-container" class="rounded-2xl" data-url="https://calendly.com/vvashist2590" style="min-width:320px;height:650px;">
-            <div class="h-full w-full grid place-items-center text-sm text-zinc-500">Loading scheduler…</div>
+            <div class="mt-4 relative mx-auto" style="height:300px" aria-labelledby="compass-title">
+              <!-- Center -->
+              <div id="compass-center"
+                   class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-300 px-4 py-2 text-xs bg-white relative select-none focus:outline-none"
+                   role="button" tabindex="0" aria-label="Reset compass needle">Response</div>
+
+              <!-- Needle -->
+              <svg id="compass-needle" class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <g transform="translate(50,50)">
+                  <polygon points="0,-34 2,-28 0,-30 -2,-28" fill="currentColor" class="text-zinc-700"></polygon>
+                  <rect x="-0.6" y="-28" width="1.2" height="30" rx="0.6" class="fill-zinc-700"></rect>
+                  <circle r="2.2" class="fill-white stroke-zinc-700" stroke-width="0.6"></circle>
+                </g>
+                <line x1="50" y1="4"  x2="50" y2="96" stroke="rgba(0,0,0,0.08)"/>
+                <line x1="4"  y1="50" x2="96" y2="50" stroke="rgba(0,0,0,0.08)"/>
+              </svg>
+
+              <!-- Hotspots (no extra text near Identity) -->
+              <button class="compass-chip" data-signal="Expert Signals" style="left:50%;top:8%" aria-label="Expert Signals">Expert Signals</button>
+              <button class="compass-chip" data-signal="Trust"           style="right:6%;top:50%;transform:translateY(-50%)" aria-label="Trust">Trust</button>
+              <button class="compass-chip" data-signal="Story"           style="left:50%;bottom:8%" aria-label="Story">Story</button>
+              <button class="compass-chip" data-signal="Identity"        style="left:6%;top:50%;transform:translateY(-50%)" aria-label="Identity">Identity</button>
+              <button class="compass-chip" data-signal="Activity"        style="left:12%;top:14%" aria-label="Activity">Activity</button>
+              <button class="compass-chip" data-signal="Community"       style="right:12%;bottom:14%" aria-label="Community">Community</button>
+            </div>
+
+            <p id="compass-caption" class="mt-3 text-xs text-zinc-600" aria-live="polite">Hover or tap a signal to see how it moves response.</p>
+            <p class="mt-1 text-[11px] text-zinc-500">Pick a direction for the next 2 weeks. We’ll ship a tiny ritual and measure the response.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-zinc-200">
-    <div class="mx-auto max-w-6xl px-4 py-8 text-xs text-zinc-600 flex flex-wrap items-center gap-4">
-      <span>© <span id="year"></span> The Perception Studio</span>
-      <span>•</span>
-      <a href="mailto:hello@theperception.studio" class="underline" aria-label="Email us at hello@theperception.studio">hello@theperception.studio</a>
-      <span>•</span>
-      <a href="tel:+918800686480" class="underline" aria-label="Call us at +91 8800686480">+91 8800686480</a>
-      <span>•</span>
-      <a href="/privacy.html" class="underline">Privacy</a>
-      <span>•</span>
-      <a href="https://www.instagram.com/theperception.studio/" class="underline" target="_blank" rel="noopener">Instagram</a>
-      <span>•</span>
-      <a href="https://www.linkedin.com/company/the-perception-studio" class="underline" target="_blank" rel="noopener">LinkedIn</a>
+    <!-- Proof strip -->
+    <section class="border-y border-zinc-200 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-6 text-xs text-zinc-600 flex flex-wrap items-center gap-4">
+        <div class="w-full">
+          <p class="text-sm text-zinc-700 mb-2">Featured in Times of India, YourStory, and BusinessLine — trusted by education innovators, healthcare leaders, and luxury founders.</p>
+          <div class="text-xs text-zinc-600 flex flex-wrap items-center gap-4">
+            <span>Seen in:</span>
+            <a class="font-medium underline hover:no-underline" href="https://timesofindia.indiatimes.com/city/gurgaon/gurgaon-man-chosen-from-over-a-lakh-applicants-for-the-month-long-antarctic-sabbatical/articleshow/72023081.cms" target="_blank" rel="noopener" aria-label="Opens Times of India article in a new tab">Times of India</a>
+            <span>•</span>
+            <a class="font-medium underline hover:no-underline" href="https://yourstory.com/socialstory/2019/11/teach-for-india-fellow-learning-startup-imbue-education" target="_blank" rel="noopener" aria-label="Opens YourStory article in a new tab">YourStory</a>
+            <span>•</span>
+            <a class="font-medium underline hover:no-underline" href="https://www.thehindubusinessline.com/info-tech/love-simulated-why-some-are-turning-to-ai-for-romance/article69835095.ece" target="_blank" rel="noopener" aria-label="Opens BusinessLine article in a new tab">BusinessLine</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="mx-auto max-w-6xl px-4 py-16">
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
+          <h3 class="font-medium">Education — From local launch → national relevance</h3>
+          <p class="mt-2 text-sm text-zinc-600"><strong>Before:</strong> Great program, low visibility beyond the city.</p>
+          <p class="text-sm text-zinc-600"><strong>After:</strong> Narrative + media engine; cited by leading educators and policy conversations.</p>
+          <p class="text-sm text-zinc-700"><strong>Outcome:</strong> Applications and partnerships grew; parents outside the city started asking for entry.</p>
+        </article>
+        <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
+          <h3 class="font-medium">Healthcare — From jargon → trust pathway</h3>
+          <p class="mt-2 text-sm text-zinc-600"><strong>Before:</strong> Confusing language, anxious patients.</p>
+          <p class="text-sm text-zinc-600"><strong>After:</strong> Clear care flows and human messaging that reduced drop-offs.</p>
+          <p class="text-sm text-zinc-700"><strong>Outcome:</strong> Patients understood next steps faster; fewer disengaged before first consult.</p>
+        </article>
+        <article class="rounded-2xl border border-zinc-200 p-5 bg-white">
+          <h3 class="font-medium">Real estate — From product → philosophy</h3>
+          <p class="mt-2 text-sm text-zinc-600"><strong>Before:</strong> Features without a story.</p>
+          <p class="text-sm text-zinc-600"><strong>After:</strong> Founder-led positioning and global media map; luxury reframed as stillness and craft.</p>
+          <p class="text-sm text-zinc-700"><strong>Outcome:</strong> Higher-quality inbound; international partners referenced the philosophy verbatim.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Services / Rituals -->
+    <section id="services" class="border-y border-zinc-200 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <h2 class="text-2xl font-semibold">What we do (Rituals)</h2>
+        <div class="mt-6 grid md:grid-cols-3 gap-6 text-sm">
+          <div class="rounded-2xl border border-zinc-200 p-5">
+            <h3 class="font-medium">Perception Audit</h3>
+            <p class="mt-2 text-zinc-600">Your mirror: how you’re seen vs how you should be seen. We deliver a one-page map + actions you can use tomorrow.</p>
+          </div>
+          <div class="rounded-2xl border border-zinc-200 p-5">
+            <h3 class="font-medium">Narrative & Media Engine</h3>
+            <p class="mt-2 text-zinc-600">Your signal fire: placement strategy, authored articles, journalist mapping. A monthly rhythm that compounds.</p>
+          </div>
+          <div class="rounded-2xl border border-zinc-200 p-5">
+            <h3 class="font-medium">Founder Visibility</h3>
+            <p class="mt-2 text-zinc-600">Your stage: LinkedIn system, stages, podcasts. Visibility that builds trust — not noise.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="mx-auto max-w-6xl px-4 py-16">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-2xl font-semibold">Why us</h2>
+          <p class="mt-3 text-zinc-700">We don’t spray messages. We design responses. Every move is rooted in a human truth — desire, fear, status, belonging — used ethically to build trust. No theatre. Real levers.</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 p-5 bg-white">
+          <h3 class="font-medium">Founder</h3>
+          <p class="mt-2 text-sm text-zinc-600">Built on experience across Goldman Sachs, Teach For India, National Geographic, PR leadership, and global expeditions — united by one question: <em>How do humans respond?</em> From boardrooms to Antarctic ice, the pattern was the same: outcomes followed perception. That’s the work we do here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="border-t border-zinc-200 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <h2 class="text-2xl font-semibold">Start a conversation</h2>
+        <p class="mt-2 text-sm text-zinc-600">Tell us where you’re stuck. We’ll listen first.</p>
+        <p class="mt-1 text-sm text-zinc-600">Prefer a fuller brief? <a class="underline" href="#brief">Fill the Collaborator Entry Brief</a>.</p>
+        <div class="mt-6 grid md:grid-cols-2 gap-8">
+          <!-- Simple contact form (uses your own Formspree ID later if you want) -->
+          <form action="https://formspree.io/f/FORM_ID" method="POST" class="rounded-2xl border border-zinc-200 p-5 space-y-3">
+            <input type="hidden" name="_subject" value="New enquiry — The Perception Studio" />
+            <label class="block text-sm">Name
+              <input required name="name" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2"/>
+            </label>
+            <label class="block text-sm">Email
+              <input required type="email" name="email" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2"/>
+            </label>
+            <fieldset class="block text-sm">
+              <legend class="mb-2">What do you need?</legend>
+              <div class="mt-1 space-y-2">
+                <label class="flex items-center gap-2"><input type="checkbox" name="needs" value="Perception Audit" class="rounded"> Perception Audit</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="needs" value="Narrative & Media Engine" class="rounded"> Narrative & Media Engine</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="needs" value="Founder Visibility" class="rounded"> Founder Visibility</label>
+                <label class="flex items-center gap-2"><input type="checkbox" name="needs" value="Other" class="rounded"> Other</label>
+              </div>
+            </fieldset>
+            <label class="block text-sm mt-3">Anything else?
+              <textarea name="message" rows="3" class="mt-1 w-full rounded-xl border border-zinc-300 px-3 py-2" placeholder="A few lines are enough."></textarea>
+            </label>
+            <button class="rounded-2xl bg-zinc-900 text-white px-5 py-3 text-sm">Send</button>
+            <p class="text-xs text-zinc-500">Call / WhatsApp: <a class="underline" href="tel:+918800686480">+91 8800686480</a></p>
+          </form>
+
+          <!-- Calendly (lazy-loaded) -->
+          <div class="rounded-2xl border border-zinc-200 p-5">
+            <div id="calendly-container" class="rounded-2xl" data-url="https://calendly.com/vvashist2590" style="min-width:320px;height:650px;">
+              <div class="h-full w-full grid place-items-center text-sm text-zinc-500">Loading scheduler…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-200">
+      <div class="mx-auto max-w-6xl px-4 py-8 text-xs text-zinc-600 flex flex-wrap items-center gap-4">
+        <span>© <span id="year"></span> The Perception Studio</span>
+        <span>•</span>
+        <a href="mailto:hello@theperception.studio" class="underline" aria-label="Email us at hello@theperception.studio">hello@theperception.studio</a>
+        <span>•</span>
+        <a href="tel:+918800686480" class="underline" aria-label="Call us at +91 8800686480">+91 8800686480</a>
+        <span>•</span>
+        <a href="#brief" class="underline">Collaborator Entry Brief</a>
+        <span>•</span>
+        <a href="https://www.instagram.com/theperception.studio/" class="underline" target="_blank" rel="noopener">Instagram</a>
+        <span>•</span>
+        <a href="https://www.linkedin.com/company/the-perception-studio" class="underline" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ---------------- Collaborator Brief View (multi-step) ---------------- -->
+  <div id="brief" style="display:none;">
+    <div class="wrap">
+      <header class="flex items-center justify-between gap-4">
+        <div>
+          <h1>Collaborator Entry Brief</h1>
+          <p class="muted">Step-by-step. No “right” answers — just truth and clarity.</p>
+        </div>
+        <a href="#" class="text-sm" style="color:var(--accent)">← Back</a>
+      </header>
+
+      <div class="card">
+        <!-- Progress status -->
+        <div class="steps-head" aria-hidden="true">
+          <span class="chip active" data-chip="0">1 · Who you are</span>
+          <span class="chip" data-chip="1">2 · Connect</span>
+          <span class="chip" data-chip="2">3 · Landscape</span>
+          <span class="chip" data-chip="3">4 · Strengths</span>
+          <span class="chip" data-chip="4">5 · Foundation</span>
+          <span class="chip" data-chip="5">6 · Uploads</span>
+        </div>
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="16">
+          <div class="bar" id="bar" style="width:16%"></div>
+        </div>
+
+        <!-- Messages -->
+        <div id="ok" class="alert ok">Thanks — your brief is in. We’ll get back to you soon.</div>
+        <div id="err" class="alert err">Hmm, something went wrong. Please check required fields and try again.</div>
+
+        <!-- Form -->
+        <form id="multiForm" action="https://formspree.io/f/xdkdrvdk" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" novalidate>
+          <input type="hidden" name="_subject" value="New Collaborator Entry Brief" />
+          <!-- <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you"> -->
+
+          <!-- STEP 1 -->
+          <section class="step active" data-step="0" aria-label="Who you are">
+            <div class="row grid-2">
+              <div>
+                <label for="full_name">Full Name & Pronunciation *</label>
+                <input id="full_name" name="full_name" type="text" required placeholder="e.g., Diya Pathania (DEE-yah)">
+              </div>
+              <div>
+                <label for="public_name">Preferred Public Name *</label>
+                <input id="public_name" name="public_name" type="text" required placeholder="what you want used publicly">
+              </div>
+            </div>
+            <div class="row grid-2">
+              <div>
+                <label for="role">Current Role / Title *</label>
+                <input id="role" name="role" type="text" required placeholder="e.g., Perception Architect">
+              </div>
+              <div>
+                <label for="email">Primary Contact Email *</label>
+                <input id="email" name="email" type="email" required placeholder="you@domain.com">
+              </div>
+            </div>
+            <ul class="hints">
+              <li>These help us reference and address you correctly in external contexts.</li>
+            </ul>
+          </section>
+
+          <!-- STEP 2 -->
+          <section class="step" data-step="1" aria-label="How we connect">
+            <fieldset>
+              <legend>Preferred Communication Channel *</legend>
+              <div class="checks">
+                <label><input type="checkbox" name="communication[]" value="Email" data-require-one="communication"> Email</label>
+                <label><input type="checkbox" name="communication[]" value="Phone/WhatsApp" data-require-one="communication"> Phone/WhatsApp</label>
+                <label><input type="checkbox" name="communication[]" value="E-meet" data-require-one="communication"> E-meet</label>
+                <label><input type="checkbox" name="communication[]" value="Other" data-require-one="communication"> Other</label>
+              </div>
+              <p class="muted">Pick at least one.</p>
+            </fieldset>
+
+            <div>
+              <label for="availability">Best Times for Calls / Check-ins *</label>
+              <input id="availability" name="availability" type="text" required placeholder="e.g., Mon–Thu, 3–6 PM IST">
+            </div>
+          </section>
+
+          <!-- STEP 3 -->
+          <section class="step" data-step="2" aria-label="Your current landscape">
+            <div>
+              <label for="touchpoints">Current Digital Touchpoints (paste URLs)</label>
+              <textarea id="touchpoints" name="digital_touchpoints" placeholder="LinkedIn, website, portfolio, press links"></textarea>
+            </div>
+            <div class="row grid-2">
+              <div>
+                <label for="objective">Immediate Objective *</label>
+                <textarea id="objective" name="immediate_objective" required placeholder="In your own words — what you want to achieve first"></textarea>
+              </div>
+              <div>
+                <label for="audience">Audience / Stakeholder Targets *</label>
+                <textarea id="audience" name="audience_targets" required placeholder="Who you want to notice or engage with you"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 4 -->
+          <section class="step" data-step="3" aria-label="Strengths & challenges">
+            <div class="row grid-2">
+              <div>
+                <label for="strengths">Known Strengths / Unique Angles *</label>
+                <textarea id="strengths" name="strengths" required placeholder="What you believe sets you apart"></textarea>
+              </div>
+              <div>
+                <label for="weaknesses">Perceived Weaknesses or Blocks *</label>
+                <textarea id="weaknesses" name="weaknesses" required placeholder="Where you feel progress gets stuck"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 5 -->
+          <section class="step" data-step="4" aria-label="Foundation">
+            <div class="row grid-3">
+              <div>
+                <label for="milestones">Past Wins or Milestones *</label>
+                <textarea id="milestones" name="milestones" required placeholder="Brief list — professional or personal"></textarea>
+              </div>
+              <div>
+                <label for="nonneg">Non-Negotiables *</label>
+                <textarea id="nonneg" name="non_negotiables" required placeholder="Anything off-limits for positioning or narrative"></textarea>
+              </div>
+              <div>
+                <label for="testimonials">Past clients/employers willing to give a public testimonial *</label>
+                <textarea id="testimonials" name="testimonials" required placeholder="Names or orgs we can reference"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 6 -->
+          <section class="step" data-step="5" aria-label="Uploads & declaration">
+            <div class="row grid-3">
+              <div>
+                <label for="resume">Upload your latest resume/CV</label>
+                <input id="resume" name="resume" type="file">
+                <p class="muted">PDF/DOC preferred.</p>
+              </div>
+              <div>
+                <label for="covers">Upload cover letters / pitch emails</label>
+                <input id="covers" name="cover_letters" type="file">
+              </div>
+              <div>
+                <label for="portfolio">Upload portfolio / case studies</label>
+                <input id="portfolio" name="portfolio" type="file">
+              </div>
+            </div>
+
+            <fieldset>
+              <legend>Declaration *</legend>
+              <label class="checks">
+                <input type="checkbox" name="declaration" value="Confirmed" required>
+                I confirm that the above information is accurate to the best of my knowledge.
+              </label>
+            </fieldset>
+          </section>
+
+          <!-- Navigation -->
+          <div class="actions">
+            <div class="left">
+              <button class="btn secondary" type="button" id="prev" disabled>← Back</button>
+              <button class="btn" type="button" id="next">Next →</button>
+            </div>
+            <button class="btn" type="submit" id="submit" style="display:none">Submit</button>
+          </div>
+          <p class="muted">You can review before submitting on the last step.</p>
+        </form>
+      </div>
     </div>
-  </footer>
+  </div>
 
   <!-- Scripts -->
   <script>
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());
 
-    // Compass bearings + copy
+    // Simple hash router: #brief shows brief view; anything else shows home
+    function showViewFromHash(){
+      const hash = location.hash;
+      const home = document.getElementById('home');
+      const brief = document.getElementById('brief');
+      if(hash === '#brief'){
+        home.style.display = 'none';
+        brief.style.display = 'block';
+        window.scrollTo(0,0);
+      } else {
+        home.style.display = 'block';
+        brief.style.display = 'none';
+      }
+    }
+    window.addEventListener('hashchange', showViewFromHash);
+    document.addEventListener('DOMContentLoaded', showViewFromHash);
+
+    // Calendly lazy-load (only on home view when container becomes visible)
+    (function lazyCalendly(){
+      const el = document.getElementById('calendly-container');
+      if(!el) return;
+      function initInline(){
+        if(window.Calendly && typeof Calendly.initInlineWidget === 'function'){
+          Calendly.initInlineWidget({ url: el.dataset.url, parentElement: el });
+          return true;
+        }
+        return false;
+      }
+      const onVisible = ()=>{
+        const ok = initInline();
+        if(ok) return;
+        const t = setInterval(()=>{ if(initInline()) clearInterval(t); }, 150);
+      };
+      if('IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(entry=>{
+            if(entry.isIntersecting){ onVisible(); io.disconnect(); }
+          });
+        });
+        io.observe(el);
+      } else { onVisible(); }
+    })();
+
+    // Compass bearings + copy (and no stray "RE" anywhere)
     const bearings = {
       "Expert Signals": 0, "Trust": 90, "Story": 180,
       "Identity": 270, "Activity": 315, "Community": 135
     };
     const copy = {
-      "Expert Signals": "Proof people can’t dispute — credentials, artifacts, third‑party trust.",
-      "Trust": "Friction drops when risk feels managed — language, promises, follow‑through.",
+      "Expert Signals": "Proof people can’t dispute — credentials, artifacts, third-party trust.",
+      "Trust": "Friction drops when risk feels managed — language, promises, follow-through.",
       "Story": "Meaning that travels — not features, but narrative momentum.",
       "Identity": "Public stance and symbols — what you’re known for and why it matters.",
-      "Activity": "Visible motion — cadence, recency, work‑in‑public increases surface area.",
+      "Activity": "Visible motion — cadence, recency, work-in-public increases surface area.",
       "Community": "People who echo you — owned circles, generous participation, compounding."
     };
-
     (function initCompass(){
       const container = document.getElementById('compass');
       if(!container) return;
       const needle = document.getElementById('compass-needle');
       const caption = document.getElementById('compass-caption');
       const center  = document.getElementById('compass-center');
-
       const setNeedle = (deg)=>{ needle.style.transform = `rotate(${deg}deg)` };
       const setCaption = (t)=>{ caption.textContent = t };
-
       document.querySelectorAll('.compass-chip').forEach(el=>{
         const name = el.dataset.signal; const deg = bearings[name];
         el.title = copy[name] || '';
-        el.addEventListener('mouseenter', ()=>{
-          if(!container.classList.contains('pinned')){ setNeedle(deg); setCaption(copy[name]); }
-        });
-        el.addEventListener('focus', ()=>{
-          if(!container.classList.contains('pinned')){ setNeedle(deg); setCaption(copy[name]); }
-        });
+        el.addEventListener('mouseenter', ()=>{ if(!container.classList.contains('pinned')){ setNeedle(deg); setCaption(copy[name]); }});
+        el.addEventListener('focus',      ()=>{ if(!container.classList.contains('pinned')){ setNeedle(deg); setCaption(copy[name]); }});
         el.addEventListener('click', ()=>{
           const pinned = container.getAttribute('data-pinned');
           if(pinned===name){
@@ -341,46 +589,70 @@
           setNeedle(deg); setCaption(`${name}: ${copy[name]}`);
         });
       });
-
-      center.addEventListener('click', ()=>{
-        container.classList.remove('pinned'); container.removeAttribute('data-pinned');
-        setNeedle(0); setCaption('Hover or tap a signal to see how it moves response.');
-      });
+      center.addEventListener('click', ()=>{ container.classList.remove('pinned'); container.removeAttribute('data-pinned'); setNeedle(0); setCaption('Hover or tap a signal to see how it moves response.') });
       center.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ center.click(); } });
-
       setNeedle(0);
     })();
 
-    // Calendly lazy‑load (wait until both: element is visible AND Calendly script is ready)
-    (function lazyCalendly(){
-      const el = document.getElementById('calendly-container');
-      if(!el) return;
+    // ---------- Multi-step form logic (scoped to #brief) ----------
+    (function(){
+      const brief = document.getElementById('brief');
+      if(!brief) return;
+      const form = brief.querySelector('#multiForm');
+      const steps = [...brief.querySelectorAll('.step')];
+      const chips = [...brief.querySelectorAll('.chip')];
+      const bar = brief.querySelector('#bar');
+      const ok = brief.querySelector('#ok');
+      const err = brief.querySelector('#err');
+      const prevBtn = brief.querySelector('#prev');
+      const nextBtn = brief.querySelector('#next');
+      const submitBtn = brief.querySelector('#submit');
+      let i = 0;
 
-      function initInline(){
-        if(window.Calendly && typeof Calendly.initInlineWidget === 'function'){
-          Calendly.initInlineWidget({ url: el.dataset.url, parentElement: el });
-          return true;
-        }
-        return false;
+      function setStep(n){
+        i = Math.max(0, Math.min(steps.length-1, n));
+        steps.forEach((s,idx)=>s.classList.toggle('active', idx===i));
+        chips.forEach((c,idx)=>c.classList.toggle('active', idx===i));
+        const pct = Math.round(((i+1)/steps.length)*100);
+        bar.style.width = pct + '%';
+        bar.parentElement.setAttribute('aria-valuenow', pct);
+        prevBtn.disabled = i===0;
+        nextBtn.style.display = (i === steps.length-1) ? 'none' : '';
+        submitBtn.style.display = (i === steps.length-1) ? '' : 'none';
+        ok.style.display = 'none'; err.style.display = 'none';
+        const firstInput = steps[i].querySelector('input, textarea, select');
+        if(firstInput) firstInput.focus({preventScroll:true});
       }
-
-      // Observe visibility, then poll for Calendly readiness
-      const onVisible = ()=>{
-        const ok = initInline();
-        if(ok) return;
-        const t = setInterval(()=>{ if(initInline()) clearInterval(t); }, 150);
-      };
-
-      if('IntersectionObserver' in window){
-        const io = new IntersectionObserver((entries)=>{
-          entries.forEach(entry=>{
-            if(entry.isIntersecting){ onVisible(); io.disconnect(); }
-          });
+      function validateCurrentStep(){
+        let valid = true;
+        const fields = steps[i].querySelectorAll('input, textarea, select');
+        fields.forEach(el=>{
+          if(el.dataset.requireOne === 'communication'){
+            const anyChecked = [...steps[i].querySelectorAll('input[data-require-one="communication"]')].some(cb=>cb.checked);
+            if(!anyChecked){ valid = false; steps[i].querySelector('input[data-require-one="communication"]').focus(); }
+          }
+          if(valid && typeof el.reportValidity === 'function' && el.offsetParent !== null){
+            if(!el.reportValidity()) valid = false;
+          }
         });
-        io.observe(el);
-      } else {
-        onVisible();
+        return valid;
       }
+      prevBtn && prevBtn.addEventListener('click', ()=> setStep(i-1));
+      nextBtn && nextBtn.addEventListener('click', ()=>{ if(validateCurrentStep()) setStep(i+1); });
+
+      form && form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        ok.style.display = 'none'; err.style.display = 'none';
+        if(!validateCurrentStep()) return;
+        const data = new FormData(form);
+        try{
+          const res = await fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} });
+          if(res.ok){
+            form.reset(); setStep(0); ok.style.display='block'; window.scrollTo({top:0, behavior:'smooth'});
+          } else { err.style.display='block'; window.scrollTo({top:0, behavior:'smooth'}); }
+        }catch(_e){ err.style.display='block'; window.scrollTo({top:0, behavior:'smooth'}); }
+      });
+      setStep(0);
     })();
   </script>
 </body>

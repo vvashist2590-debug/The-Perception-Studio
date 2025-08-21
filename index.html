@@ -640,4 +640,99 @@
     prevBtn.disabled = i === 0;
     nextBtn.style.display = (i === steps.length - 1) ? 'none' : '';
     submitBtn.style.display = (i === steps.length - 1) ? '' : 'none';
-    ok.style.display = 'no
+    ok.style.display = 'none';
+    err.style.display = 'none';
+    const firstInput = steps[i].querySelector('input, textarea, select');
+    if (firstInput) firstInput.focus({ preventScroll: true });
+  }
+
+  // Validate only the CURRENT (visible) step
+  function validateCurrentStep(){
+    let valid = true;
+    const fields = steps[i].querySelectorAll('input, textarea, select');
+
+    fields.forEach(el => {
+      // group rule for communication[]
+      if (el.dataset.requireOne === 'communication') {
+        const anyChecked = [...steps[i].querySelectorAll('input[data-require-one="communication"]')]
+          .some(cb => cb.checked);
+        if (!anyChecked) {
+          valid = false;
+          steps[i].querySelector('input[data-require-one="communication"]').focus();
+        }
+      }
+      if (valid && typeof el.reportValidity === 'function' && el.offsetParent !== null) {
+        if (!el.reportValidity()) valid = false;
+      }
+    });
+    return valid;
+  }
+
+  // Validate ALL required fields across ALL steps on final submit
+  function validateAllSteps(){
+    // 1) at least one communication[] checked (step 2)
+    const commChecks = brief.querySelectorAll('input[name="communication[]"]');
+    if (commChecks.length) {
+      const anyChecked = [...commChecks].some(cb => cb.checked);
+      if (!anyChecked) { commChecks[0].focus(); return false; }
+    }
+    // 2) every [required] in the entire form
+    const requiredFields = brief.querySelectorAll('#multiForm [required]');
+    for (const el of requiredFields) {
+      if (el.type === 'checkbox' || el.type === 'radio') {
+        if (!el.checked) { el.focus(); return false; }
+        continue;
+      }
+      if (typeof el.checkValidity === 'function') {
+        if (!el.checkValidity()) { el.reportValidity && el.reportValidity(); el.focus(); return false; }
+      } else {
+        if (!String(el.value || '').trim()) { el.focus(); return false; }
+      }
+    }
+    return true;
+  }
+
+  prevBtn && prevBtn.addEventListener('click', () => setStep(i - 1));
+  nextBtn && nextBtn.addEventListener('click', () => { if (validateCurrentStep()) setStep(i + 1); });
+
+  form && form.addEventListener('submit', async (e)=>{
+    e.preventDefault(); // submit via fetch
+    ok.style.display = 'none';
+    err.style.display = 'none';
+
+    // validate current step then whole form
+    if (!validateCurrentStep()) return;
+    if (!validateAllSteps()) { err.style.display = 'block'; return; }
+
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      const payload = await res.json().catch(() => ({}));
+
+      if (res.ok) {
+        form.reset();
+        setStep(0);
+        ok.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Show Formspree's actual error if provided
+        err.textContent = (payload && payload.errors && payload.errors[0] && payload.errors[0].message)
+          ? payload.errors[0].message
+          : 'Submission failed. Please check settings in Formspree.';
+        err.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } catch (_e) {
+      err.textContent = 'Network error. Please try again.';
+      err.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  setStep(0);
+})();

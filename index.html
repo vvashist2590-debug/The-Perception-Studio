@@ -630,6 +630,7 @@
   const submitBtn = brief.querySelector('#submit');
   let i = 0;
 
+<<<<<<< HEAD
   function setStep(n){
     i = Math.max(0, Math.min(steps.length - 1, n));
     steps.forEach((s, idx) => s.classList.toggle('active', idx === i));
@@ -711,6 +712,20 @@
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' }
+=======
+      form && form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        ok.style.display = 'none'; err.style.display = 'none';
+        if (!validateCurrentStep()) return;
+if (!validateAllSteps()) { err.style.display = 'block'; return; }
+        const data = new FormData(form);
+        try{
+          const res = await fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} });
+          if(res.ok){
+            form.reset(); setStep(0); ok.style.display='block'; window.scrollTo({top:0, behavior:'smooth'});
+          } else { err.style.display='block'; window.scrollTo({top:0, behavior:'smooth'}); }
+        }catch(_e){ err.style.display='block'; window.scrollTo({top:0, behavior:'smooth'}); }
+>>>>>>> parent of 901b60a (Update index.html)
       });
       const payload = await res.json().catch(() => ({}));
 

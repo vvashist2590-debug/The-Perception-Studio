@@ -369,148 +369,156 @@
         <div id="ok" class="alert ok">Thanks — your brief is in. We’ll get back to you soon.</div>
         <div id="err" class="alert err">Hmm, something went wrong. Please check required fields and try again.</div>
 
-        <!-- Form -->
-        <form id="multiForm" action="https://formspree.io/f/mvgqjjbq" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" novalidate>
-          <input type="email" name="email" required>
-  <button type="submit">Join</button>
-          <!-- <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you"> -->
+        <!-- Collaborator Entry Form -->
+<form id="multiForm" 
+      action="https://formspree.io/f/mvgqjjbq" 
+      method="POST" 
+      enctype="multipart/form-data" 
+      accept-charset="UTF-8" 
+      novalidate>
 
-          <!-- STEP 1 -->
-          <section class="step active" data-step="0" aria-label="Who you are">
-            <div class="row grid-2">
-              <div>
-                <label for="full_name">Full Name & Pronunciation *</label>
-                <input id="full_name" name="full_name" type="text" required placeholder="e.g., Diya Pathania (DEE-yah)">
-              </div>
-              <div>
-                <label for="public_name">Preferred Public Name *</label>
-                <input id="public_name" name="public_name" type="text" required placeholder="what you want used publicly">
-              </div>
-            </div>
-            <div class="row grid-2">
-              <div>
-                <label for="role">Current Role / Title *</label>
-                <input id="role" name="role" type="text" required placeholder="e.g., Perception Architect">
-              </div>
-              <div>
-                <label for="email">Primary Contact Email *</label>
-                <input id="email" name="email" type="email" required placeholder="you@domain.com">
-              </div>
-            </div>
-            <ul class="hints">
-              <li>These help us reference and address you correctly in external contexts.</li>
-            </ul>
-          </section>
+  <!-- Email subject line inside Formspree dashboard -->
+  <input type="hidden" name="_subject" value="New Collaborator Entry Brief" />
 
-          <!-- STEP 2 -->
-          <section class="step" data-step="1" aria-label="How we connect">
-            <fieldset>
-              <legend>Preferred Communication Channel *</legend>
-              <div class="checks">
-                <label><input type="checkbox" name="communication[]" value="Email" data-require-one="communication"> Email</label>
-                <label><input type="checkbox" name="communication[]" value="Phone/WhatsApp" data-require-one="communication"> Phone/WhatsApp</label>
-                <label><input type="checkbox" name="communication[]" value="E-meet" data-require-one="communication"> E-meet</label>
-                <label><input type="checkbox" name="communication[]" value="Other" data-require-one="communication"> Other</label>
-              </div>
-              <p class="muted">Pick at least one.</p>
-            </fieldset>
+  <!-- Redirect after successful submit -->
+  <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you" />
 
-            <div>
-              <label for="availability">Best Times for Calls / Check-ins *</label>
-              <input id="availability" name="availability" type="text" required placeholder="e.g., Mon–Thu, 3–6 PM IST">
-            </div>
-          </section>
+  <!-- Hidden reply-to (helps Zapier/Gmail know target address) -->
+  <input type="hidden" name="_replyto" value="{{email}}">
 
-          <!-- STEP 3 -->
-          <section class="step" data-step="2" aria-label="Your current landscape">
-            <div>
-              <label for="touchpoints">Current Digital Touchpoints (paste URLs)</label>
-              <textarea id="touchpoints" name="digital_touchpoints" placeholder="LinkedIn, website, portfolio, press links"></textarea>
-            </div>
-            <div class="row grid-2">
-              <div>
-                <label for="objective">Immediate Objective *</label>
-                <textarea id="objective" name="immediate_objective" required placeholder="In your own words — what you want to achieve first"></textarea>
-              </div>
-              <div>
-                <label for="audience">Audience / Stakeholder Targets *</label>
-                <textarea id="audience" name="audience_targets" required placeholder="Who you want to notice or engage with you"></textarea>
-              </div>
-            </div>
-          </section>
-
-          <!-- STEP 4 -->
-          <section class="step" data-step="3" aria-label="Strengths & challenges">
-            <div class="row grid-2">
-              <div>
-                <label for="strengths">Known Strengths / Unique Angles *</label>
-                <textarea id="strengths" name="strengths" required placeholder="What you believe sets you apart"></textarea>
-              </div>
-              <div>
-                <label for="weaknesses">Perceived Weaknesses or Blocks *</label>
-                <textarea id="weaknesses" name="weaknesses" required placeholder="Where you feel progress gets stuck"></textarea>
-              </div>
-            </div>
-          </section>
-
-          <!-- STEP 5 -->
-          <section class="step" data-step="4" aria-label="Foundation">
-            <div class="row grid-3">
-              <div>
-                <label for="milestones">Past Wins or Milestones *</label>
-                <textarea id="milestones" name="milestones" required placeholder="Brief list — professional or personal"></textarea>
-              </div>
-              <div>
-                <label for="nonneg">Non-Negotiables *</label>
-                <textarea id="nonneg" name="non_negotiables" required placeholder="Anything off-limits for positioning or narrative"></textarea>
-              </div>
-              <div>
-                <label for="testimonials">Past clients/employers willing to give a public testimonial *</label>
-                <textarea id="testimonials" name="testimonials" required placeholder="Names or orgs we can reference"></textarea>
-              </div>
-            </div>
-          </section>
-
-          <!-- STEP 6 -->
-          <section class="step" data-step="5" aria-label="Uploads & declaration">
-            <div class="row grid-3">
-              <div>
-                <label for="resume">Upload your latest resume/CV</label>
-                <input id="resume" name="resume" type="file">
-                <p class="muted">PDF/DOC preferred.</p>
-              </div>
-              <div>
-                <label for="covers">Upload cover letters / pitch emails</label>
-                <input id="covers" name="cover_letters" type="file">
-              </div>
-              <div>
-                <label for="portfolio">Upload portfolio / case studies</label>
-                <input id="portfolio" name="portfolio" type="file">
-              </div>
-            </div>
-
-            <fieldset>
-              <legend>Declaration *</legend>
-              <label class="checks">
-                <input type="checkbox" name="declaration" value="Confirmed" required>
-                I confirm that the above information is accurate to the best of my knowledge.
-              </label>
-            </fieldset>
-          </section>
-
-          <!-- Navigation -->
-          <div class="actions">
-            <div class="left">
-              <button class="btn secondary" type="button" id="prev" disabled>← Back</button>
-              <button class="btn" type="button" id="next">Next →</button>
-            </div>
-            <button class="btn" type="submit" id="submit" style="display:none">Submit</button>
-          </div>
-          <p class="muted">You can review before submitting on the last step.</p>
-        </form>
+  <!-- STEP 1 -->
+  <section class="step active" data-step="0" aria-label="Who you are">
+    <div class="row grid-2">
+      <div>
+        <label for="full_name">Full Name & Pronunciation *</label>
+        <input id="full_name" name="full_name" type="text" required placeholder="e.g., Diya Pathania (DEE-yah)">
+      </div>
+      <div>
+        <label for="public_name">Preferred Public Name *</label>
+        <input id="public_name" name="public_name" type="text" required placeholder="what you want used publicly">
       </div>
     </div>
+    <div class="row grid-2">
+      <div>
+        <label for="role">Current Role / Title *</label>
+        <input id="role" name="role" type="text" required placeholder="e.g., Perception Architect">
+      </div>
+      <div>
+        <label for="email">Primary Contact Email *</label>
+        <input id="email" name="email" type="email" required placeholder="you@domain.com">
+      </div>
+    </div>
+    <ul class="hints">
+      <li>These help us reference and address you correctly in external contexts.</li>
+    </ul>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step" data-step="1" aria-label="How we connect">
+    <fieldset>
+      <legend>Preferred Communication Channel *</legend>
+      <div class="checks">
+        <label><input type="checkbox" name="communication[]" value="Email" data-require-one="communication"> Email</label>
+        <label><input type="checkbox" name="communication[]" value="Phone/WhatsApp" data-require-one="communication"> Phone/WhatsApp</label>
+        <label><input type="checkbox" name="communication[]" value="E-meet" data-require-one="communication"> E-meet</label>
+        <label><input type="checkbox" name="communication[]" value="Other" data-require-one="communication"> Other</label>
+      </div>
+      <p class="muted">Pick at least one.</p>
+    </fieldset>
+
+    <div>
+      <label for="availability">Best Times for Calls / Check-ins *</label>
+      <input id="availability" name="availability" type="text" required placeholder="e.g., Mon–Thu, 3–6 PM IST">
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step" data-step="2" aria-label="Your current landscape">
+    <div>
+      <label for="touchpoints">Current Digital Touchpoints (paste URLs)</label>
+      <textarea id="touchpoints" name="digital_touchpoints" placeholder="LinkedIn, website, portfolio, press links"></textarea>
+    </div>
+    <div class="row grid-2">
+      <div>
+        <label for="objective">Immediate Objective *</label>
+        <textarea id="objective" name="immediate_objective" required placeholder="In your own words — what you want to achieve first"></textarea>
+      </div>
+      <div>
+        <label for="audience">Audience / Stakeholder Targets *</label>
+        <textarea id="audience" name="audience_targets" required placeholder="Who you want to notice or engage with you"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="step" data-step="3" aria-label="Strengths & challenges">
+    <div class="row grid-2">
+      <div>
+        <label for="strengths">Known Strengths / Unique Angles *</label>
+        <textarea id="strengths" name="strengths" required placeholder="What you believe sets you apart"></textarea>
+      </div>
+      <div>
+        <label for="weaknesses">Perceived Weaknesses or Blocks *</label>
+        <textarea id="weaknesses" name="weaknesses" required placeholder="Where you feel progress gets stuck"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5 -->
+  <section class="step" data-step="4" aria-label="Foundation">
+    <div class="row grid-3">
+      <div>
+        <label for="milestones">Past Wins or Milestones *</label>
+        <textarea id="milestones" name="milestones" required placeholder="Brief list — professional or personal"></textarea>
+      </div>
+      <div>
+        <label for="nonneg">Non-Negotiables *</label>
+        <textarea id="nonneg" name="non_negotiables" required placeholder="Anything off-limits for positioning or narrative"></textarea>
+      </div>
+      <div>
+        <label for="testimonials">Past clients/employers willing to give a public testimonial *</label>
+        <textarea id="testimonials" name="testimonials" required placeholder="Names or orgs we can reference"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 6 -->
+  <section class="step" data-step="5" aria-label="Uploads & declaration">
+    <div class="row grid-3">
+      <div>
+        <label for="resume">Upload your latest resume/CV</label>
+        <input id="resume" name="resume" type="file">
+        <p class="muted">PDF/DOC preferred.</p>
+      </div>
+      <div>
+        <label for="covers">Upload cover letters / pitch emails</label>
+        <input id="covers" name="cover_letters" type="file">
+      </div>
+      <div>
+        <label for="portfolio">Upload portfolio / case studies</label>
+        <input id="portfolio" name="portfolio" type="file">
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>Declaration *</legend>
+      <label class="checks">
+        <input type="checkbox" name="declaration" value="Confirmed" required>
+        I confirm that the above information is accurate to the best of my knowledge.
+      </label>
+    </fieldset>
+  </section>
+
+  <!-- Navigation -->
+  <div class="actions">
+    <div class="left">
+      <button class="btn secondary" type="button" id="prev" disabled>← Back</button>
+      <button class="btn" type="button" id="next">Next →</button>
+    </div>
+    <button class="btn" type="submit" id="submit" style="display:none">Submit</button>
   </div>
+  <p class="muted">You can review before submitting on the last step.</p>
+</form>
 
   <!-- Scripts -->
   <script>

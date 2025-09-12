@@ -369,7 +369,7 @@
         <div id="ok" class="alert ok">Thanks — your brief is in. We’ll get back to you soon.</div>
         <div id="err" class="alert err">Hmm, something went wrong. Please check required fields and try again.</div>
 
-        <!-- Collaborator Entry Form -->
+       <!-- Collaborator Entry Form -->
 <form id="multiForm" 
       action="https://formspree.io/f/mvgqjjbq" 
       method="POST" 
@@ -391,21 +391,25 @@
     <div class="row grid-2">
       <div>
         <label for="full_name">Full Name & Pronunciation *</label>
-        <input id="full_name" name="full_name" type="text" required placeholder="e.g., Diya Pathania (DEE-yah)">
+        <input id="full_name" name="full_name" type="text" required 
+               placeholder="Diya Pathania (DEE-yah)">
       </div>
       <div>
         <label for="public_name">Preferred Public Name *</label>
-        <input id="public_name" name="public_name" type="text" required placeholder="what you want used publicly">
+        <input id="public_name" name="public_name" type="text" required 
+               placeholder="Diya Pathania">
       </div>
     </div>
     <div class="row grid-2">
       <div>
         <label for="role">Current Role / Title *</label>
-        <input id="role" name="role" type="text" required placeholder="e.g., Perception Architect">
+        <input id="role" name="role" type="text" required 
+               placeholder="Perception Architect">
       </div>
       <div>
         <label for="email">Primary Contact Email *</label>
-        <input id="email" name="email" type="email" required placeholder="you@domain.com">
+        <input id="email" name="email" type="email" required 
+               placeholder="diya@example.com">
       </div>
     </div>
     <ul class="hints">
@@ -428,7 +432,8 @@
 
     <div>
       <label for="availability">Best Times for Calls / Check-ins *</label>
-      <input id="availability" name="availability" type="text" required placeholder="e.g., Mon–Thu, 3–6 PM IST">
+      <input id="availability" name="availability" type="text" required 
+             placeholder="Mon–Thu, 3–6 PM IST">
     </div>
   </section>
 
@@ -436,16 +441,19 @@
   <section class="step" data-step="2" aria-label="Your current landscape">
     <div>
       <label for="touchpoints">Current Digital Touchpoints (paste URLs)</label>
-      <textarea id="touchpoints" name="digital_touchpoints" placeholder="LinkedIn, website, portfolio, press links"></textarea>
+      <textarea id="touchpoints" name="digital_touchpoints" 
+                placeholder="https://linkedin.com/in/diya • https://yourwebsite.com"></textarea>
     </div>
     <div class="row grid-2">
       <div>
         <label for="objective">Immediate Objective *</label>
-        <textarea id="objective" name="immediate_objective" required placeholder="In your own words — what you want to achieve first"></textarea>
+        <textarea id="objective" name="immediate_objective" required 
+                  placeholder="Secure media coverage for my upcoming book launch"></textarea>
       </div>
       <div>
         <label for="audience">Audience / Stakeholder Targets *</label>
-        <textarea id="audience" name="audience_targets" required placeholder="Who you want to notice or engage with you"></textarea>
+        <textarea id="audience" name="audience_targets" required 
+                  placeholder="Lifestyle journalists, publishing houses, creative entrepreneurs"></textarea>
       </div>
     </div>
   </section>
@@ -455,11 +463,13 @@
     <div class="row grid-2">
       <div>
         <label for="strengths">Known Strengths / Unique Angles *</label>
-        <textarea id="strengths" name="strengths" required placeholder="What you believe sets you apart"></textarea>
+        <textarea id="strengths" name="strengths" required 
+                  placeholder="Storytelling ability, strong design sensibility, public speaking experience"></textarea>
       </div>
       <div>
         <label for="weaknesses">Perceived Weaknesses or Blocks *</label>
-        <textarea id="weaknesses" name="weaknesses" required placeholder="Where you feel progress gets stuck"></textarea>
+        <textarea id="weaknesses" name="weaknesses" required 
+                  placeholder="Limited press relationships, need help with consistent content pipeline"></textarea>
       </div>
     </div>
   </section>
@@ -469,15 +479,18 @@
     <div class="row grid-3">
       <div>
         <label for="milestones">Past Wins or Milestones *</label>
-        <textarea id="milestones" name="milestones" required placeholder="Brief list — professional or personal"></textarea>
+        <textarea id="milestones" name="milestones" required 
+                  placeholder="Spoke at TEDx Delhi • Featured in Vogue India • Launched sustainable brand"></textarea>
       </div>
       <div>
         <label for="nonneg">Non-Negotiables *</label>
-        <textarea id="nonneg" name="non_negotiables" required placeholder="Anything off-limits for positioning or narrative"></textarea>
+        <textarea id="nonneg" name="non_negotiables" required 
+                  placeholder="No misrepresentation of personal values • Avoid political affiliations"></textarea>
       </div>
       <div>
         <label for="testimonials">Past clients/employers willing to give a public testimonial *</label>
-        <textarea id="testimonials" name="testimonials" required placeholder="Names or orgs we can reference"></textarea>
+        <textarea id="testimonials" name="testimonials" required 
+                  placeholder="Ritu Kumar (Fashion Designer) • The Slow (Creative Platform)"></textarea>
       </div>
     </div>
   </section>

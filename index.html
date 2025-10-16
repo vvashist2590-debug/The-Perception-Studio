@@ -13,10 +13,12 @@
     <section class="section">
       <div class="frame">
         <div class="photo">
-          <!-- Use your local colored image -->
           <img src="Image1.jpg" alt="Hero Image"/>
         </div>
         <div class="copy">
+          <!-- Accessible H1 for SEO/semantics while visual headline stays as rotating questions -->
+          <h1 class="visually-hidden">Perception Audit — See how the world reads you online</h1>
+
           <div class="kicker">Perception Audit</div>
           <div class="questions">
             <div class="q active">Why aren’t recruiters calling?</div>
@@ -50,14 +52,13 @@
       </div>
     </section>
 
+
     <!-- PR vs PA (Canvas Reveal) -->
     <section id="compare" class="section">
       <div class="frame" style="grid-template-columns:1.1fr .9fr">
         <div class="photo">
           <div class="stage" id="stage">
-            <!-- Your colored image for reveal -->
             <img id="stageImage" src="Image3.jpg" alt="PR vs PA">
-            <!-- Canvas overlay that we erase on mouse move -->
             <canvas id="revealCanvas"></canvas>
           </div>
         </div>
@@ -138,212 +139,212 @@
       </div>
     </section>
 
-<!-- FAQ — Native dropdown + chat bubbles + right-side persona toggle -->
-<section id="faq" class="section">
-  <div class="faq-grid" data-mode="diya">
-    <!-- LEFT: FAQs -->
-    <div class="faq-col">
-      <h2>FAQ — fast and honest</h2>
+    <!-- FAQ — Native dropdown + chat bubbles + right-side persona toggle -->
+    <section id="faq" class="section">
+      <!-- IMPORTANT: data-mode controls which persona renders -->
+      <div class="faq-grid" data-mode="diya">
+        <!-- LEFT: FAQs -->
+        <div class="faq-col">
+          <h2>FAQ — fast and honest</h2>
 
-      <!-- 1 -->
-      <details class="qa">
-        <summary>
-          <span class="avatar user" aria-hidden="true">?</span>
-          Is this just branding with a new name?
-        </summary>
-        <div class="answer">
-          <!-- Diya (strategy) -->
-          <div class="ans diya">
-            <div class="bubble reply">
-              <span class="avatar diya" aria-hidden="true">D</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <ul class="check">
-                  <li>Branding <em>tells</em>; PA <em>measures what sticks</em>.</li>
-                  <li>We score first-impression, findability, proof density, trust markers.</li>
-                  <li>Output: score + ranked gaps + 7-day fix-list.</li>
-                </ul>
+          <!-- 1 -->
+          <details class="qa">
+            <summary>
+              <span class="avatar user" aria-hidden="true">?</span>
+              Is this just branding with a new name?
+            </summary>
+            <div class="answer">
+              <div class="ans diya">
+                <div class="bubble reply">
+                  <span class="avatar diya" aria-hidden="true">D</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <ul class="check">
+                      <li>Branding <em>tells</em>; PA <em>measures what sticks</em>.</li>
+                      <li>We score first-impression, findability, proof density, trust markers.</li>
+                      <li>Output: score + ranked gaps + 7-day fix-list.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="ans vivek">
+                <div class="bubble reply">
+                  <span class="avatar vivek" aria-hidden="true">V</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <blockquote>
+                      Branding is the mask you wear.
+                      PA asks:
+                      <em>when the page closes, what do people still remember?</em>
+                    </blockquote>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- Vivek (philosophy) -->
-          <div class="ans vivek">
-            <div class="bubble reply">
-              <span class="avatar vivek" aria-hidden="true">V</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <blockquote>
-                  Branding is the mask you wear.
-                    PA asks:
-                  <em>when the page closes, what do people still remember?</em>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
+          </details>
 
-      <!-- 2 -->
-      <details class="qa">
-        <summary>
-          <span class="avatar user" aria-hidden="true">?</span>
-          How is PA different from PR?
-        </summary>
-        <div class="answer">
-          <div class="ans diya">
-            <div class="bubble reply">
-              <span class="avatar diya" aria-hidden="true">D</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <ul class="check">
-                  <li>PR = distribution; PA = memory installation.</li>
-                  <li>Inputs: LinkedIn, Google, profiles, resumes → consistent signals.</li>
-                  <li>KPIs: recall rate, profile CTR, message clarity score.</li>
-                </ul>
+          <!-- 2 -->
+          <details class="qa">
+            <summary>
+              <span class="avatar user" aria-hidden="true">?</span>
+              How is PA different from PR?
+            </summary>
+            <div class="answer">
+              <div class="ans diya">
+                <div class="bubble reply">
+                  <span class="avatar diya" aria-hidden="true">D</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <ul class="check">
+                      <li>PR = distribution; PA = memory installation.</li>
+                      <li>Inputs: LinkedIn, Google, profiles, resumes → consistent signals.</li>
+                      <li>KPIs: recall rate, profile CTR, message clarity score.</li>
+                    </ul>
+                    <p class="muted">Deliverable: score, peer rank, prioritized fixes.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ans vivek">
+                <div class="bubble reply">
+                  <span class="avatar vivek" aria-hidden="true">V</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <blockquote>
+                      PR is a trumpet. PA is the room’s acoustics:
+                      one makes noise, the other makes sound resonate & stay.
+                    </blockquote>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="ans vivek">
-            <div class="bubble reply">
-              <span class="avatar vivek" aria-hidden="true">V</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <blockquote>
-                  PR is a trumpet. PA is the room’s acoustics:
-                  one makes noise, the other makes sound resonate & stay.
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
+          </details>
 
-      <!-- 3 -->
-      <details class="qa">
-        <summary>
-          <span class="avatar user" aria-hidden="true">?</span>
-          How do you measure perception?
-        </summary>
-        <div class="answer">
-          <div class="ans diya">
-            <div class="bubble reply">
-              <span class="avatar diya" aria-hidden="true">D</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <ul class="check">
-                  <li>3-second headline test (first-impression speed).</li>
-                  <li>Findability (SERP coverage, titles, panel).</li>
-                  <li>Proof density & narrative consistency.</li>
-                  <li>Trust markers (visuals, tone, cross-linking).</li>
-                </ul>
-                <p class="muted">Deliverable: score, peer rank, prioritized fixes.</p>
+          <!-- 3 -->
+          <details class="qa">
+            <summary>
+              <span class="avatar user" aria-hidden="true">?</span>
+              How do you measure perception?
+            </summary>
+            <div class="answer">
+              <div class="ans diya">
+                <div class="bubble reply">
+                  <span class="avatar diya" aria-hidden="true">D</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <ul class="check">
+                      <li>3-second headline test (first-impression speed).</li>
+                      <li>Findability (SERP coverage, titles, panel).</li>
+                      <li>Proof density & narrative consistency.</li>
+                      <li>Trust markers (visuals, tone, cross-linking).</li>
+                    </ul>
+                    <p class="muted">Deliverable: score, peer rank, prioritized fixes.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ans vivek">
+                <div class="bubble reply">
+                  <span class="avatar vivek" aria-hidden="true">V</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <blockquote>
+                      Memory compresses experience. We test what compresses:
+                      signal, coherence, proof — under time pressure.
+                    </blockquote>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="ans vivek">
-            <div class="bubble reply">
-              <span class="avatar vivek" aria-hidden="true">V</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <blockquote>
-                  Memory compresses experience. We test what compresses:
-                  signal, coherence, proof — under time pressure.
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
+          </details>
 
-      <!-- 4 -->
-      <details class="qa">
-        <summary>
-          <span class="avatar user" aria-hidden="true">?</span>
-          Can I compare with a friend or competitor?
-        </summary>
-        <div class="answer">
-          <div class="ans diya">
-            <div class="bubble reply">
-              <span class="avatar diya" aria-hidden="true">D</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <ul class="check">
-                  <li>Upload both LinkedIn/Resumes.</li>
-                  <li>We return side-by-side deltas + win path.</li>
-                  <li>Shareable link for your team.</li>
-                </ul>
+          <!-- 4 -->
+          <details class="qa">
+            <summary>
+              <span class="avatar user" aria-hidden="true">?</span>
+              Can I compare with a friend or competitor?
+            </summary>
+            <div class="answer">
+              <div class="ans diya">
+                <div class="bubble reply">
+                  <span class="avatar diya" aria-hidden="true">D</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <ul class="check">
+                      <li>Upload both LinkedIn/Resumes.</li>
+                      <li>We return side-by-side deltas + win path.</li>
+                      <li>Shareable link for your team.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="ans vivek">
+                <div class="bubble reply">
+                  <span class="avatar vivek" aria-hidden="true">V</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <blockquote>Comparison reveals edges. Edges create memory.</blockquote>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="ans vivek">
-            <div class="bubble reply">
-              <span class="avatar vivek" aria-hidden="true">V</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <blockquote>Comparison reveals edges. Edges create memory.</blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
+          </details>
 
-      <!-- 5 -->
-      <details class="qa">
-        <summary>
-          <span class="avatar user" aria-hidden="true">?</span>
-          How fast is this?
-        </summary>
-        <div class="answer">
-          <div class="ans diya">
-            <div class="bubble reply">
-              <span class="avatar diya" aria-hidden="true">D</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <ul class="check">
-                  <li>Quick Scan: 24h.</li>
-                  <li>Deep Audit + compare: 3–5 days.</li>
-                  <li>Fix sprint: 7 days, tracked.</li>
-                </ul>
+          <!-- 5 -->
+          <details class="qa">
+            <summary>
+              <span class="avatar user" aria-hidden="true">?</span>
+              How fast is this?
+            </summary>
+            <div class="answer">
+              <div class="ans diya">
+                <div class="bubble reply">
+                  <span class="avatar diya" aria-hidden="true">D</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <ul class="check">
+                      <li>Quick Scan: 24h.</li>
+                      <li>Deep Audit + compare: 3–5 days.</li>
+                      <li>Fix sprint: 7 days, tracked.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="ans vivek">
+                <div class="bubble reply">
+                  <span class="avatar vivek" aria-hidden="true">V</span>
+                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="atext">
+                    <blockquote>Clarity itself is speed. And speed is kindness.</blockquote>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="ans vivek">
-            <div class="bubble reply">
-              <span class="avatar vivek" aria-hidden="true">V</span>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="atext">
-                <blockquote>Clarity itself is speed. And speed is kindness.</blockquote>
-              </div>
-            </div>
-          </div>
+          </details>
         </div>
-      </details>
-    </div>
 
-    <!-- RIGHT: Persona toggle -->
-    <aside class="persona-panel" aria-label="Answer voice">
-      <div class="panel-card">
-        <div class="panel-title">Answer voice</div>
-        <div class="persona-toggle" role="tablist">
-          <button id="p-diya" class="pbtn active" aria-pressed="true">Diya — Strategy</button>
-          <button id="p-vivek" class="pbtn" aria-pressed="false">Vivek — Philosophy</button>
-        </div>
-        <p class="muted small">Switch to change the voice for every open answer.</p>
+        <!-- RIGHT: Persona toggle -->
+        <aside class="persona-panel" aria-label="Answer voice">
+          <div class="panel-card">
+            <div class="panel-title">Answer voice</div>
+            <div class="persona-toggle" role="tablist">
+              <button id="p-diya" class="pbtn active" aria-pressed="true">Diya — Strategy</button>
+              <button id="p-vivek" class="pbtn" aria-pressed="false">Vivek — Philosophy</button>
+            </div>
+            <p class="muted small">Switch to change the voice for every open answer.</p>
+          </div>
+        </aside>
       </div>
-    </aside>
-  </div>
-</section>
+    </section>
 
-<footer class="footer">
-  <div class="foot-inner">
-    <div class="brand"></div>
-    <nav class="social">
-      <a href="https://www.linkedin.com/in/diyapathania" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://www.instagram.com/yourhandle" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:hello@theperception.studio">Email</a>
-    </nav>
-  </div>
-</footer>
+    <footer class="footer">
+      <div class="foot-inner">
+        <div class="brand"></div>
+        <nav class="social">
+          <a href="https://www.linkedin.com/in/diyapathania" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.instagram.com/yourhandle" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:hello@theperception.studio">Email</a>
+        </nav>
+      </div>
+    </footer>
 
     <p class="muted center" style="margin:40px 0 60px">© The Perception Studio </p>
 

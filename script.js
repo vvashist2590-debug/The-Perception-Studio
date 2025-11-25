@@ -18,16 +18,15 @@
   const canvas = document.getElementById('revealCanvas');
   const btnPR  = document.getElementById('btn-pr');
   const btnPA  = document.getElementById('btn-pa');
-  const def    = document.getElementById('definition');
+  const def    = document.getElementById('definition'); // optional helper text (currently not present)
 
   if (!stage || !img || !canvas) return;
   const ctx = canvas.getContext('2d');
 
   let mode = 'PR';         // 'PR' or 'PA'
-  let radius = 70;         // size of the reveal circle
-  let dpr = Math.max(1, window.devicePixelRatio || 1);
+  const radius = 70;       // size of the reveal circle
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
 
-  // Resize canvas to match rendered size (and DPR for crispness)
   function resizeCanvas() {
     const rect = stage.getBoundingClientRect();
     canvas.width = Math.round(rect.width * dpr);
@@ -35,14 +34,12 @@
     canvas.style.width = rect.width + 'px';
     canvas.style.height = rect.height + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // Fill black overlay fresh
     ctx.globalCompositeOperation = 'source-over';
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, rect.width, rect.height);
   }
   window.addEventListener('resize', resizeCanvas);
 
-  // Draw a circular “hole” at x,y
   function punch(x, y) {
     ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath();
@@ -51,7 +48,6 @@
     ctx.globalCompositeOperation = 'source-over';
   }
 
-  // For PR, we reset the overlay each move, then punch once
   function handleMouseMove(e) {
     const rect = stage.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -60,12 +56,11 @@
     if (mode === 'PR') {
       ctx.globalCompositeOperation = 'source-over';
       ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, rect.width, rect.height); // reset to full black
+      ctx.fillRect(0, 0, rect.width, rect.height);
     }
     punch(x, y);
   }
 
-  // Reset overlay fully black (used on PR mouseleave)
   function resetOverlay() {
     const rect = stage.getBoundingClientRect();
     ctx.globalCompositeOperation = 'source-over';
@@ -73,7 +68,6 @@
     ctx.fillRect(0, 0, rect.width, rect.height);
   }
 
-  // Toggle modes
   function setPR() {
     mode = 'PR';
     btnPR?.classList.add('active'); btnPR?.setAttribute('aria-pressed', 'true');
@@ -87,22 +81,19 @@
     btnPA?.classList.add('active'); btnPA?.setAttribute('aria-pressed', 'true');
     btnPR?.classList.remove('active'); btnPR?.setAttribute('aria-pressed', 'false');
     if (def) def.innerHTML = '<strong>PA</strong>: each slice you hover stays lit; reveal the full image.';
-    // keep what’s already revealed (don’t reset)
   }
 
   btnPR?.addEventListener('click', setPR);
   btnPA?.addEventListener('click', setPA);
 
-  // Attach interactions to stage (not canvas, which is pointer-events:none)
   stage.addEventListener('mousemove', handleMouseMove);
   stage.addEventListener('mouseleave', () => {
     if (mode === 'PR') resetOverlay();
   });
 
-  // Init once image has dimensions (in case it loads later)
   function init() {
     resizeCanvas();
-    setPR(); // default
+    setPR();
   }
   if (img.complete) {
     init();
@@ -130,27 +121,22 @@
     btnVivek?.classList.toggle('active', !isDiya);
     btnVivek?.setAttribute('aria-pressed', String(!isDiya));
 
-    // Re-play typing for currently visible persona in all open items
     root.querySelectorAll('details.qa[open]').forEach(d => showForCurrentPersona(d));
   }
 
   btnDiya?.addEventListener('click', ()=> setMode('diya'));
   btnVivek?.addEventListener('click', ()=> setMode('vivek'));
 
-  // Initialize each details item
   root.querySelectorAll('details.qa').forEach(d=>{
-    // Hide both persona texts initially
     d.querySelectorAll('.atext').forEach(el => el.style.display = 'none');
     d.querySelectorAll('.typing').forEach(el => el.style.display = 'none');
 
     d.addEventListener('toggle', ()=>{
       if (!d.open) {
-        // Closing: hide typing + text for both personas
         d.querySelectorAll('.typing').forEach(el => el.style.display = 'none');
         d.querySelectorAll('.atext').forEach(el => el.style.display = 'none');
         return;
       }
-      // Opening: show typing for the currently selected persona
       showForCurrentPersona(d);
     });
   });
@@ -160,7 +146,6 @@
     const target = detailsEl.querySelector(`.ans.${mode}`);
     if (!target) return;
 
-    // Hide all persona texts & typing, then show typing for the active one
     detailsEl.querySelectorAll('.atext').forEach(el => el.style.display = 'none');
     detailsEl.querySelectorAll('.typing').forEach(el => el.style.display = 'none');
 
@@ -178,6 +163,82 @@
     }, DELAY);
   }
 
-  // Default to Diya on load
   setMode('diya');
+})();
+
+// ===== Scroll-based section reveal =====
+(() => {
+  const sections = document.querySelectorAll('.section');
+  if (!sections.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    sections.forEach(sec => sec.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  sections.forEach(sec => {
+    if (sec.classList.contains('is-visible')) return;
+    observer.observe(sec);
+  });
+})();
+
+// ===== PR vs PA text toggle (definition blocks) =====
+(() => {
+  const prBtn  = document.getElementById("btn-pr");
+  const paBtn  = document.getElementById("btn-pa");
+  const prCopy = document.querySelector(".pr-copy");
+  const paCopy = document.querySelector(".pa-copy");
+
+  if (!prBtn || !paBtn || !prCopy || !paCopy) return;
+
+  prBtn.addEventListener("click", () => {
+    prBtn.classList.add("active");
+    paBtn.classList.remove("active");
+    prCopy.classList.add("active");
+    paCopy.classList.remove("active");
+  });
+
+  paBtn.addEventListener("click", () => {
+    paBtn.classList.add("active");
+    prBtn.classList.remove("active");
+    paCopy.classList.add("active");
+    prCopy.classList.remove("active");
+  });
+})();
+
+// ===== Ethos underline reveal on scroll =====
+(() => {
+  const ethos = document.querySelector('.footer-ethos-inner');
+  if (!ethos) return;
+
+  if (!('IntersectionObserver' in window)) {
+    ethos.classList.add('underline-active');
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          ethos.classList.add('underline-active');
+          observer.unobserve(ethos);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  observer.observe(ethos);
 })();

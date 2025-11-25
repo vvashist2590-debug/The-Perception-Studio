@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>TPS — Perception Architecture (Preview v9)</title>
+  <title>TPS - Perception Architecture (Preview v9)</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div class="wrap">
 
     <!-- HERO -->
-    <section class="section">
+    <section class="section is-visible">
       <div class="frame">
         <div class="photo">
           <img src="assets/Image1.jpg" alt="Hero Image"/>
         </div>
         <div class="copy">
           <!-- Accessible H1 for SEO/semantics while visual headline stays as rotating questions -->
-          <h1 class="visually-hidden">Perception Audit — See how the world reads you online</h1>
+          <h1 class="visually-hidden">Perception Audit - See how the world reads you online</h1>
 
           <div class="kicker">Perception Audit</div>
           <div class="questions">
@@ -38,20 +38,26 @@
     <section id="audit" class="section">
       <div class="frame" style="grid-template-columns:.9fr 1.1fr">
         <div class="copy">
-          <h2>What the audit actually does</h2>
-          <div class="audit-points">
-            <p>• Measures how you show up vs. how you think you do.</p>
-            <p>• Shows what people see first: headline, Google, LinkedIn.</p>
-            <p>• Pinpoints trust breaks: weak photos, vague words, mismatched tone.</p>
+          <h2>Most people aren’t misunderstood, they’re not <br> seen the way they intend.</h2>
+
+          <p class="audit-sub">This audit helps you understand why.</p>
+
+          <ul class="bullet-list">
+            <li>How your presence feels to others, compared to how you believe it does.</li>
+            <li>The small tone or visual cues that may be holding back trust without you realising.</li>
+            <li>Where your story loses the meaning or warmth you actually meant to convey.</li>
+          </ul>
+
+          <div class="cta">
+            <a href="#compare" class="btn">See how we’re different</a>
           </div>
-          <div class="cta"><a href="#compare" class="btn">See how we’re different</a></div>
         </div>
+
         <div class="photo">
           <img src="assets/Image 2.jpg" alt="Audit metaphor"/>
         </div>
       </div>
     </section>
-
 
     <!-- PR vs PA (Canvas Reveal) -->
     <section id="compare" class="section">
@@ -66,16 +72,40 @@
           <div class="kicker">How are we different</div>
           <h2>PR vs Perception Architecture</h2>
 
-          <div class="toggle" role="tablist" aria-label="Mode toggle">
-            <button id="btn-pr" class="tbtn active" aria-pressed="true">PR</button>
-            <button id="btn-pa" class="tbtn" aria-pressed="false">PA</button>
-          </div>
-
-          <p class="definition" id="definition">
-            <strong>PR</strong>: only the slice under your cursor is visible; nothing sticks.
+          <p class="muted small">
+            Switch between PR and PA to see how your digital presence changes.
           </p>
 
-          <div class="cta"><a href="#score" class="btn">View my scorecard</a></div>
+          <div class="toggle" role="tablist" aria-label="Mode toggle">
+            <button id="btn-pr" class="tbtn active" aria-pressed="true">
+              PR - One slice of identity
+            </button>
+            <button id="btn-pa" class="tbtn" aria-pressed="false">
+              PA - The full Identity
+            </button>
+          </div>
+
+          <!-- both definitions live here, one on top of the other -->
+          <p class="definition pr-copy active">
+            <strong>PR</strong> shows only the slice someone notices in the moment.<br>
+            Nothing connects. Nothing stays.
+          </p>
+
+          <p class="definition pa-copy">
+            <strong>Perception Architecture</strong> lights up your whole presence -<br>
+            so the version of you that’s accurate becomes the version people remember.
+          </p>
+
+          <!-- anchor/subline stays below the definitions -->
+          <p class="prpa-anchor">
+            Most people aren’t seen incorrectly - they’re seen incompletely.<br>
+            <span>Perception Architecture reveals the whole picture.</span>
+          </p>
+
+          <div class="cta">
+            <a href="#score" class="btn">View my scorecard</a>
+          </div>
+
           <div class="hr"></div>
         </div>
       </div>
@@ -91,10 +121,22 @@
             <div class="muted">Overall score</div>
             <div class="meter"><span style="width:76%"></span></div>
             <div class="grid2">
-              <div><div class="muted">Visibility</div><div class="meter"><span style="width:72%"></span></div></div>
-              <div><div class="muted">Story</div><div class="meter"><span style="width:64%"></span></div></div>
-              <div><div class="muted">Consistency</div><div class="meter"><span style="width:58%"></span></div></div>
-              <div><div class="muted">Trust signals</div><div class="meter"><span style="width:81%"></span></div></div>
+              <div>
+                <div class="muted">Visibility</div>
+                <div class="meter"><span style="width:72%"></span></div>
+              </div>
+              <div>
+                <div class="muted">Story</div>
+                <div class="meter"><span style="width:64%"></span></div>
+              </div>
+              <div>
+                <div class="muted">Consistency</div>
+                <div class="meter"><span style="width:58%"></span></div>
+              </div>
+              <div>
+                <div class="muted">Trust signals</div>
+                <div class="meter"><span style="width:81%"></span></div>
+              </div>
             </div>
             <p class="muted" style="margin-top:16px">Ahead of <strong>62%</strong> of peers in your role.</p>
           </div>
@@ -107,51 +149,69 @@
       </div>
     </section>
 
-    <!-- DIALOGUE -->
+    <!-- DIALOGUE — left/right chat layout -->
     <section id="dialogue" class="section">
-      <div class="dialogue">
-        <h2 style="margin-bottom:8px">The conversation that built TPS</h2>
-        <div class="line"><div class="bubble"><div class="tag">Vivek</div>Most people think branding is visual. It’s not. It’s psychological. It’s how memory encodes you when you’re not in the room.</div></div>
-        <div class="line"><div class="bubble"><div class="tag">Diya</div>okay but who’s actually gonna sit and read all that theory? people scroll in 3 seconds. we need to make them <em>feel</em> it, not explain it.</div></div>
-        <div class="line"><div class="bubble"><div class="tag">Vivek</div>That’s exactly the problem. Everyone’s designing for the scroll. No one’s designing for memory. We need to build perception that lasts.</div></div>
-        <div class="line"><div class="bubble"><div class="tag">Diya</div>cool. so make it automated, make it clean, and make it move. gen z doesn’t trust static anymore. they trust systems that adapt.</div></div>
-        <div class="line"><div class="bubble"><div class="tag">Vivek</div>What if we measured perception like architects measure buildings? Structure. Load-bearing points. What breaks under pressure.</div></div>
-        <div class="line"><div class="bubble"><div class="tag">Diya</div>now we’re talking. audit it. show them the gaps. then rebuild it with design + automation. give me 24 hours.</div></div>
-        <div class="narr">And that’s how TPS was born. Where psychology meets design. Where thinking meets execution.</div>
-      </div>
-    </section>
+      <div class="dialogue chat-layout">
+        <h2 class="chat-title">The conversation that built TPS</h2>
 
-    <!-- FIX -->
-    <section id="fix" class="section center">
-      <div class="copy" style="margin:0 auto">
-        <h2>Fix what matters — fast</h2>
-        <p class="muted">Pick one focused improvement. We’ll deliver clean edits, not theory.</p>
-      </div>
-      <div class="services" style="margin-top:26px">
-        <div class="grid3">
-          <div class="card"><div><h3>LinkedIn Refresh</h3><p>Headline, About, Experience, visuals — tuned for memory.</p></div><div class="price">₹1,499</div></div>
-          <div class="card"><div><h3>Resume Rebuild</h3><p>Structure, quantified wins, ATS pass — proof without fluff.</p></div><div class="price">₹1,999</div></div>
-          <div class="card"><div><h3>Search Presence Tune-up</h3><p>Google panel, titles, featured links — findability that sticks.</p></div><div class="price">₹1,199</div></div>
+        <div class="chat-row left">
+          <div class="bubble chat-bubble vivek-bubble">
+            <div class="tag">Vivek</div>
+            Most people think branding is visual. It’s not. It’s psychological. It’s how memory encodes you when you're not in the room.
+          </div>
         </div>
-      </div>
-      <div class="cta" style="justify-content:center;margin-top:24px">
-        <a class="btn" href="#">Get Started</a>
+
+        <div class="chat-row right">
+          <div class="bubble chat-bubble diya-bubble">
+            <div class="tag">Diya</div>
+            okay but who’s actually gonna sit and read all that theory? people scroll in 3 seconds. we need to make them <em>feel</em> it, not explain it.
+          </div>
+        </div>
+
+        <div class="chat-row left">
+          <div class="bubble chat-bubble vivek-bubble">
+            <div class="tag">Vivek</div>
+            That’s exactly the problem. Everyone’s designing for the scroll. No one’s designing for memory. We need to build perception that lasts.
+          </div>
+        </div>
+
+        <div class="chat-row right">
+          <div class="bubble chat-bubble diya-bubble">
+            <div class="tag">Diya</div>
+            cool. so make it automated, make it clean, and make it move. gen z doesn’t trust static anymore. they trust systems that adapt.
+          </div>
+        </div>
+
+        <div class="chat-row left">
+          <div class="bubble chat-bubble vivek-bubble">
+            <div class="tag">Vivek</div>
+            What if we measured perception like architects measure buildings? Structure. Load-bearing points. What breaks under pressure.
+          </div>
+        </div>
+
+        <div class="chat-row right">
+          <div class="bubble chat-bubble diya-bubble">
+            <div class="tag">Diya</div>
+            now we’re talking. audit it. show them the gaps. then rebuild it with design + automation. give me 24 hours.
+          </div>
+        </div>
+
+        <p class="narr-center">And that’s how TPS was born. Where psychology meets design. Where thinking meets execution.</p>
       </div>
     </section>
 
-    <!-- FAQ — Native dropdown + chat bubbles + right-side persona toggle -->
+    <!-- FAQ -->
     <section id="faq" class="section">
-      <!-- IMPORTANT: data-mode controls which persona renders -->
       <div class="faq-grid" data-mode="diya">
         <!-- LEFT: FAQs -->
         <div class="faq-col">
-          <h2>FAQ — fast and honest</h2>
+          <h2>FAQ - fast and honest</h2>
 
           <!-- 1 -->
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
-              Is this just branding with a new name?
+              <span class="q-text">Is this just branding with a new name?</span>
             </summary>
             <div class="answer">
               <div class="ans diya">
@@ -187,7 +247,7 @@
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
-              How is PA different from PR?
+              <span class="q-text">How is PA different from PR?</span>
             </summary>
             <div class="answer">
               <div class="ans diya">
@@ -223,7 +283,7 @@
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
-              How do you measure perception?
+              <span class="q-text">How do you measure perception?</span>
             </summary>
             <div class="answer">
               <div class="ans diya">
@@ -248,7 +308,7 @@
                   <div class="atext">
                     <blockquote>
                       Memory compresses experience. We test what compresses:
-                      signal, coherence, proof — under time pressure.
+                      signal, coherence, proof - under time pressure.
                     </blockquote>
                   </div>
                 </div>
@@ -260,7 +320,7 @@
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
-              Can I compare with a friend or competitor?
+              <span class="q-text">Can I compare with a friend or competitor?</span>
             </summary>
             <div class="answer">
               <div class="ans diya">
@@ -292,7 +352,7 @@
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
-              How fast is this?
+              <span class="q-text">How fast is this?</span>
             </summary>
             <div class="answer">
               <div class="ans diya">
@@ -324,31 +384,48 @@
         <!-- RIGHT: Persona toggle -->
         <aside class="persona-panel" aria-label="Answer voice">
           <div class="panel-card">
-            <div class="panel-title">Answer voice</div>
+            <div class="panel-title">Answer Voice</div>
             <div class="persona-toggle" role="tablist">
-              <button id="p-diya" class="pbtn active" aria-pressed="true">Diya — Strategy</button>
-              <button id="p-vivek" class="pbtn" aria-pressed="false">Vivek — Philosophy</button>
+              <button id="p-diya" class="pbtn active" aria-pressed="true">Diya - Strategy</button>
+              <button id="p-vivek" class="pbtn" aria-pressed="false">Vivek - Philosophy</button>
             </div>
-            <p class="muted small">Switch to change the voice for every open answer.</p>
+            <p class="muted small">Switch the voice for every open answer.</p>
           </div>
         </aside>
       </div>
     </section>
 
+    <!-- ETHOS STRIP (philosophy band above footer) -->
+    <section class="footer-ethos">
+      <div class="footer-ethos-inner">
+        <p>Where how you appear becomes<br>how you’re remembered.</p>
+      </div>
+    </section>
+
+    <!-- TPS SIGNATURE under ethos -->
+    <div class="tps-signature">© The Perception Studio, 2025</div>
+
+    <!-- FOOTER — slim functional bar -->
     <footer class="footer">
       <div class="foot-inner">
-        <div class="brand"></div>
-        <nav class="social">
-          <a href="https://www.linkedin.com/in/diyapathania" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://www.instagram.com/yourhandle" target="_blank" rel="noopener">Instagram</a>
-          <a href="mailto:hello@theperception.studio">Email</a>
+        <nav class="foot-links">
+          <a href="#audit">Audit</a>
+          <a href="#compare">PR vs PA</a>
+          <a href="#score">Scorecard</a>
+          <a href="#faq">FAQ</a>
         </nav>
+
+        <div class="foot-social">
+          <nav class="social">
+            <a class="social-icon li" href="#" aria-label="LinkedIn">in</a>
+            <a class="social-icon ig" href="#" aria-label="Instagram">IG</a>
+            <a class="social-icon mail" href="mailto:hello@theperception.studio" aria-label="Email">✉︎</a>
+          </nav>
+        </div>
       </div>
     </footer>
 
-    <p class="muted center" style="margin:40px 0 60px">© The Perception Studio </p>
-
-  </div>
+  </div><!-- /.wrap -->
 
   <script src="script.js"></script>
 </body>

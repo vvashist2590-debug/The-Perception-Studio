@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>TPS - Perception Architecture (Preview v9)</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="Final.css"/>
 </head>
 <body>
   <div class="wrap">
@@ -27,7 +27,8 @@
             <div class="q">What am I missing that others are seeing?</div>
           </div>
           <div class="cta">
-            <a href="#audit" class="btn">Start My Audit</a>
+            <!-- changed from link to button to open overlay -->
+            <button class="btn" id="startAuditBtn" type="button">Start My Audit</button>
             <a href="#compare" class="btn ghost">How we’re different</a>
           </div>
         </div>
@@ -63,6 +64,9 @@
     <section id="compare" class="section">
       <div class="frame" style="grid-template-columns:1.1fr .9fr">
         <div class="photo">
+          <div class="stage-label">
+            MOVE YOUR CURSOR ACROSS THE IMAGE TO REVEAL
+          </div>
           <div class="stage" id="stage">
             <img id="stageImage" src="assets/Image3.jpg" alt="PR vs PA">
             <canvas id="revealCanvas"></canvas>
@@ -395,38 +399,336 @@
       </div>
     </section>
 
-    <!-- ETHOS STRIP (philosophy band above footer) -->
-    <section class="footer-ethos">
-      <div class="footer-ethos-inner">
-        <p>Where how you appear becomes<br>how you’re remembered.</p>
+  </div><!-- /.wrap -->
+
+         <footer class="footer">
+  <div class="foot-inner">
+
+    <div class="foot-row foot-top">
+
+      <!-- LEFT SIDE -->
+      <div class="foot-left">
+        <div class="foot-tagline">Designed to make you seen, not loud.</div>
+        <div class="foot-copy">© 2025 The Perception Studio</div>
       </div>
-    </section>
 
-    <!-- TPS SIGNATURE under ethos -->
-    <div class="tps-signature">© The Perception Studio, 2025</div>
-
-    <!-- FOOTER — slim functional bar -->
-    <footer class="footer">
-      <div class="foot-inner">
-        <nav class="foot-links">
-          <a href="#audit">Audit</a>
-          <a href="#compare">PR vs PA</a>
-          <a href="#score">Scorecard</a>
-          <a href="#faq">FAQ</a>
+      <!-- RIGHT SIDE -->
+      <div class="foot-right">
+        <nav class="foot-legal">
+          <a href="contact.html">Contact</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="#privacy">Privacy Policy</a>
         </nav>
 
         <div class="foot-social">
-          <nav class="social">
-            <a class="social-icon li" href="#" aria-label="LinkedIn">in</a>
-            <a class="social-icon ig" href="#" aria-label="Instagram">IG</a>
-            <a class="social-icon mail" href="mailto:hello@theperception.studio" aria-label="Email">✉︎</a>
-          </nav>
+            <div class="foot-social">
+          <a class="social-icon li" href="https://www.linkedin.com/company/the-perception-studio/" target="_blank" rel="noopener noreferrer"
+            aria-label="The Perception Studio on LinkedIn">in</a>
+
+          <a class="social-icon ig" href="https://www.instagram.com/theperception.studio/" target="_blank" rel="noopener noreferrer"
+            aria-label="The Perception Studio on Instagram">IG</a>
         </div>
       </div>
-    </footer>
+
+    </div>
+
+  </div>
+</footer>
+
+
 
   </div><!-- /.wrap -->
 
-  <script src="script.js"></script>
+  <!-- ========= FULL-SCREEN AUDIT OVERLAY ========= -->
+  <!-- (rest of your HTML stays the same) -->
+
+
+
+  <!-- ========= FULL-SCREEN AUDIT OVERLAY ========= -->
+  <div class="audit-overlay" id="auditOverlay" aria-hidden="true">
+    <div class="audit-overlay-backdrop"></div>
+
+    <div class="audit-overlay-shell" role="dialog" aria-modal="true" aria-labelledby="auditTitle">
+      <header class="audit-header">
+        <div class="audit-header-top">
+          <span class="audit-kicker">Perception Audit</span>
+          <span class="audit-step-label" id="progressText">Intro</span>
+        </div>
+        <div class="audit-progress">
+          <div class="audit-progress-bar"></div>
+        </div>
+
+        <button class="audit-close" type="button" id="auditCloseBtn" aria-label="Close audit">
+          ✕
+        </button>
+      </header>
+
+      <!-- Main audit form -->
+      <form
+        id="auditForm"
+        class="audit-form"
+        action="https://formspree.io/f/xvgnvddy"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+
+        <!-- STEP 0: welcome -->
+        <section class="audit-step is-active" data-step="0">
+          <div class="step-layout">
+            <div class="step-copy">
+              <h1 id="auditTitle">See how your online signal is landing.</h1>
+              <p class="lead">
+                A quiet, structured check of how you show up to strangers —
+                not just how it feels from inside.
+              </p>
+              <p class="muted small-text">
+                10 small questions · 2–3 minutes · no right or wrong answers.
+              </p>
+              <button type="button" class="btn js-next">
+                Begin calmly
+              </button>
+            </div>
+
+            <div class="step-visual">
+              <div class="signal-card">
+                <div class="signal-pill"></div>
+                <div class="signal-lines">
+                  <span></span><span></span><span></span>
+                </div>
+                <p>
+                  “Most people aren’t misunderstood, they’re just not seen the way they intend.”
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 1 -->
+        <section class="audit-step" data-step="1">
+          <h2>Let’s start with the basics.</h2>
+          <p class="muted small-text">Just enough so we know who we’re reading for.</p>
+
+          <label class="field">
+            <span class="field-label required">Hey, what should we call you?</span>
+            <input type="text" name="name" required/>
+          </label>
+
+          <label class="field">
+            <span class="field-label required">
+              Could you share one link that represents you best?
+            </span>
+            <span class="field-hint">
+              LinkedIn, website, Instagram — anything you like.
+            </span>
+            <input type="url" name="main_link" required/>
+          </label>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="button" class="btn js-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section class="audit-step" data-step="2">
+          <h2>How would you describe what you do?</h2>
+          <p class="field-hint">Choose the one that feels closest right now.</p>
+
+          <div class="choice-grid" data-name="work_type" data-type="single">
+            <button type="button" data-value="job">I work a job</button>
+            <button type="button" data-value="business">I run a business</button>
+            <button type="button" data-value="freelance">I freelance</button>
+            <button type="button" data-value="create">I create</button>
+            <button type="button" data-value="figuring">Still figuring it out</button>
+          </div>
+          <input type="hidden" name="work_type" required/>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="button" class="btn js-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP 3 -->
+        <section class="audit-step" data-step="3">
+          <h2>
+            When people see your profile today,<br/>
+            what do you think they notice first?
+          </h2>
+
+          <div class="choice-grid" data-name="notice_first" data-type="single">
+            <button type="button" data-value="work">My work</button>
+            <button type="button" data-value="picture">My picture</button>
+            <button type="button" data-value="words">My words</button>
+            <button type="button" data-value="achievements">My achievements</button>
+            <button type="button" data-value="not_sure">I’m not sure</button>
+          </div>
+          <input type="hidden" name="notice_first" required/>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="button" class="btn js-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP 4 -->
+        <section class="audit-step" data-step="4">
+          <h2>
+            And how would you like people to feel<br/>
+            when they see your profile?
+          </h2>
+          <p class="field-hint">Choose any that feel true.</p>
+
+          <div class="choice-grid" data-name="desired_feel" data-type="multi">
+            <button type="button" data-value="trust">Trust</button>
+            <button type="button" data-value="clarity">Clarity</button>
+            <button type="button" data-value="interest">Interest</button>
+            <button type="button" data-value="respect">Respect</button>
+            <button type="button" data-value="talk_to_me">
+              “I’d like to talk to this person”
+            </button>
+          </div>
+          <input type="hidden" name="desired_feel"/>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="button" class="btn js-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP 5 -->
+        <section class="audit-step" data-step="5">
+          <h2>Which of these feels closest to your situation right now?</h2>
+
+          <div class="choice-stack" data-name="situation" data-type="single">
+            <button type="button" data-value="good_work_hidden">
+              I’ve done good work, but it doesn’t show
+            </button>
+            <button type="button" data-value="potential_not_seen">
+              People don’t see my potential
+            </button>
+            <button type="button" data-value="needs_refresh">
+              My profile needs a refresh
+            </button>
+            <button type="button" data-value="something_off">
+              I’m not sure what’s off, but something is
+            </button>
+            <button type="button" data-value="look_like_me">
+              I just want things to look like me
+            </button>
+          </div>
+          <input type="hidden" name="situation" required/>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="button" class="btn js-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP 6 -->
+        <section class="audit-step" data-step="6">
+          <h2>Anything you’d like us to look at?</h2>
+          <p class="field-hint">Posts, links, notes — totally optional.</p>
+
+          <label class="field">
+            <textarea name="extra_links" rows="4"
+              placeholder="Paste any links or notes here (optional)"></textarea>
+          </label>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="button" class="btn js-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP 7 -->
+        <section class="audit-step" data-step="7">
+          <h2>Photo for this audit</h2>
+          <p class="field-hint">You can always change it later.</p>
+
+          <div class="choice-grid" data-name="photo_choice" data-type="single">
+            <button type="button" data-value="current">Use the current one</button>
+            <button type="button" data-value="upload">I’ll upload one</button>
+            <button type="button" data-value="skip">Skip</button>
+          </div>
+          <input type="hidden" name="photo_choice" required/>
+
+          <div id="photoUploadWrap" class="upload-wrap is-hidden">
+            <label class="upload-label">
+              <span class="field-label">Upload a photo</span>
+              <input type="file" name="photo_file" accept="image/*"/>
+            </label>
+          </div>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="button" class="btn js-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP 8 -->
+        <section class="audit-step" data-step="8">
+          <h2>In one simple line…</h2>
+
+          <label class="field">
+            <span class="field-label required">
+              what do you wish your online presence could do for you?
+            </span>
+            <input type="text" name="presence_goal" required/>
+          </label>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="button" class="btn js-next">Next</button>
+          </div>
+        </section>
+
+        <!-- STEP 9 -->
+        <section class="audit-step" data-step="9">
+          <h2>How soon would you like to see improvements?</h2>
+
+          <div class="choice-grid" data-name="timeline" data-type="single">
+            <button type="button" data-value="now">Right away</button>
+            <button type="button" data-value="month">This month</button>
+            <button type="button" data-value="quarter">This quarter</button>
+            <button type="button" data-value="exploring">Just exploring</button>
+          </div>
+          <input type="hidden" name="timeline" required/>
+
+          <p class="field-hint">
+            This only helps us pace our suggestions — nothing rigid.
+          </p>
+
+          <div class="nav-row">
+            <button type="button" class="btn ghost js-back">Back</button>
+            <button type="submit" class="btn">Submit audit</button>
+          </div>
+        </section>
+
+      </form>
+
+      <!-- THANK-YOU STATE -->
+      <div class="audit-thanks" id="auditThanks">
+        <h2>Thank you — your signal is in.</h2>
+        <p class="muted small-text">
+          We’ll use the links and answers you shared to run your first perception scan.
+        </p>
+        <p class="muted small-text">
+          You’ll hear back once we’ve read your presence from the outside in.
+        </p>
+
+        <div class="btn-row">
+          <button type="button" class="btn" id="auditCloseAfter">
+            Close & return to the page
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========= END AUDIT OVERLAY ========= -->
+
+  <script src="Final.js"></script>
 </body>
 </html>

@@ -18,13 +18,13 @@
   const canvas = document.getElementById('revealCanvas');
   const btnPR  = document.getElementById('btn-pr');
   const btnPA  = document.getElementById('btn-pa');
-  const def    = document.getElementById('definition'); // optional helper text (currently not present)
+  const def    = document.getElementById('definition'); // optional helper text
 
   if (!stage || !img || !canvas) return;
   const ctx = canvas.getContext('2d');
 
-  let mode = 'PR';         // 'PR' or 'PA'
-  const radius = 70;       // size of the reveal circle
+  let mode = 'PR';
+  const radius = 70;
   const dpr = Math.max(1, window.devicePixelRatio || 1);
 
   function resizeCanvas() {
@@ -102,7 +102,7 @@
   }
 })();
 
-// ===== Persona-aware FAQ with native <details> + typing dots =====
+// ===== Persona-aware FAQ =====
 (() => {
   const root = document.querySelector('#faq .faq-grid');
   if (!root) return;
@@ -194,7 +194,7 @@
   });
 })();
 
-// ===== PR vs PA text toggle (definition blocks) =====
+// ===== PR vs PA text toggle =====
 (() => {
   const prBtn  = document.getElementById("btn-pr");
   const paBtn  = document.getElementById("btn-pa");
@@ -218,7 +218,7 @@
   });
 })();
 
-// ===== Ethos underline reveal on scroll =====
+// ===== Ethos underline reveal =====
 (() => {
   const ethos = document.querySelector('.footer-ethos-inner');
   if (!ethos) return;
@@ -241,4 +241,210 @@
   );
 
   observer.observe(ethos);
+})();
+
+// ===== AUDIT OVERLAY (full-screen, same page) =====
+(() => {
+  const overlay = document.getElementById('auditOverlay');
+  const openBtn = document.getElementById('startAuditBtn');
+  const closeBtn = document.getElementById('auditCloseBtn');
+  const form = document.getElementById('auditForm');
+  const steps = Array.from(document.querySelectorAll('.audit-step'));
+  const progressBar = document.querySelector('.audit-progress-bar');
+  const progressText = document.getElementById('progressText');
+  const thanksBlock = document.getElementById('auditThanks');
+  const closeAfterBtn = document.getElementById('auditCloseAfter');
+
+  if (!overlay || !openBtn || !form || !steps.length || !progressBar || !progressText) return;
+
+  const totalQuestionSteps = 9; // steps 1..9 (0 is intro)
+  let current = 0;
+
+  function lockScroll() {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function unlockScroll() {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
+
+  function resetFormUI() {
+    form.reset();
+    document
+      .querySelectorAll('.choice-grid button, .choice-stack button')
+      .forEach(btn => btn.classList.remove('is-selected'));
+    const wrap = document.getElementById('photoUploadWrap');
+    if (wrap) wrap.classList.add('is-hidden');
+  }
+
+  function openOverlay() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    lockScroll();
+
+    form.style.display = 'block';
+    thanksBlock?.classList.remove('is-visible');
+    resetFormUI();
+    showStep(0);
+  }
+
+  function closeOverlay() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    unlockScroll();
+  }
+
+  function updateProgress(stepIndex) {
+    if (stepIndex === 0) {
+      progressBar.style.width = '0%';
+      progressText.textContent = 'Intro';
+      return;
+    }
+    const logical = stepIndex;
+    const pct = (logical / totalQuestionSteps) * 100;
+    progressBar.style.width = pct + '%';
+    progressText.textContent = `Step ${logical} of ${totalQuestionSteps}`;
+  }
+
+  function showStep(i) {
+    if (i < 0 || i >= steps.length) return;
+    steps.forEach(s => s.classList.remove('is-active'));
+    steps[i].classList.add('is-active');
+    current = i;
+    updateProgress(i);
+    const shell = overlay.querySelector('.audit-overlay-shell');
+    if (shell) shell.scrollTop = 0;
+  }
+
+  function validateStep(stepIndex) {
+    const section = steps[stepIndex];
+    if (!section) return true;
+
+    let valid = true;
+    section.querySelectorAll('.field-error').forEach(el =>
+      el.classList.remove('field-error')
+    );
+
+    const requiredFields = section.querySelectorAll(
+      'input[required], textarea[required]'
+    );
+
+    requiredFields.forEach(field => {
+      const value = (field.value || '').trim();
+      if (!value) {
+        valid = false;
+        const wrapper = field.closest('.field') || field.parentElement;
+        if (wrapper) wrapper.classList.add('field-error');
+      }
+    });
+
+    return valid;
+  }
+
+  function showThanks() {
+    progressBar.style.width = '100%';
+    progressText.textContent = 'Done';
+
+    form.style.display = 'none';
+    if (thanksBlock) {
+      thanksBlock.classList.add('is-visible');
+    }
+    const shell = overlay.querySelector('.audit-overlay-shell');
+    if (shell) shell.scrollTop = 0;
+  }
+
+  openBtn.addEventListener('click', openOverlay);
+  closeBtn?.addEventListener('click', closeOverlay);
+  closeAfterBtn?.addEventListener('click', closeOverlay);
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeOverlay();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+      closeOverlay();
+    }
+  });
+
+  document.querySelectorAll('.js-next').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (current !== 0 && !validateStep(current)) return;
+      showStep(current + 1);
+    });
+  });
+
+  document.querySelectorAll('.js-back').forEach(btn => {
+    btn.addEventListener('click', () => {
+      showStep(current - 1);
+    });
+  });
+
+  function initChoiceGroup(group) {
+    const name = group.dataset.name;
+    const type = group.dataset.type;
+    const hidden = document.querySelector(`input[name="${name}"]`);
+
+    group.addEventListener('click', e => {
+      if (e.target.tagName !== 'BUTTON') return;
+      const btn = e.target;
+      const val = btn.dataset.value;
+
+      if (type === 'single') {
+        group.querySelectorAll('button').forEach(b =>
+          b.classList.remove('is-selected')
+        );
+        btn.classList.add('is-selected');
+        if (hidden) hidden.value = val;
+      } else {
+        btn.classList.toggle('is-selected');
+        const selected = Array.from(
+          group.querySelectorAll('button.is-selected')
+        ).map(b => b.dataset.value);
+        if (hidden) hidden.value = selected.join(',');
+      }
+
+      if (name === 'photo_choice') {
+        const wrap = document.getElementById('photoUploadWrap');
+        if (!wrap) return;
+        if (val === 'upload') wrap.classList.remove('is-hidden');
+        else wrap.classList.add('is-hidden');
+      }
+    });
+  }
+
+  document
+    .querySelectorAll('.choice-grid, .choice-stack')
+    .forEach(initChoiceGroup);
+
+  form.addEventListener('submit', async e => {
+    if (!validateStep(current)) {
+      e.preventDefault();
+      return;
+    }
+
+    const hasEndpoint =
+      form.action && form.action.toLowerCase().includes('formspree');
+
+    if (hasEndpoint) {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      try {
+        await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' }
+        });
+      } catch (err) {
+        console.error('Audit submit error:', err);
+      }
+    } else {
+      e.preventDefault();
+    }
+
+    showThanks();
+  });
 })();

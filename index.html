@@ -1,23 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TPS - Perception Architecture (Preview v9)</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <!-- PageFlip CSS (loaded but not used directly; our flip is custom) -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/page-flip/dist/css/page-flip.min.css" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- PAGE WRAPPER -->
   <div class="wrap">
 
     <!-- HERO -->
     <section class="section is-visible">
       <div class="frame">
         <div class="photo">
-          <img src="assets/Image1.jpg" alt="Hero Image"/>
+          <img src="assets/Image1.jpg" alt="Hero Image" />
         </div>
         <div class="copy">
           <!-- Accessible H1 for SEO/semantics while visual headline stays as rotating questions -->
-          <h1 class="visually-hidden">Perception Audit - See how the world reads you online</h1>
+          <h1 class="visually-hidden">
+            Perception Audit - See how the world reads you online
+          </h1>
 
           <div class="kicker">Perception Audit</div>
           <div class="questions">
@@ -26,9 +35,11 @@
             <div class="q">Why does my competitor look bigger than us?</div>
             <div class="q">What am I missing that others are seeing?</div>
           </div>
+
           <div class="cta">
-            <!-- changed from link to button to open overlay -->
-            <button class="btn" id="startAuditBtn" type="button">Start My Audit</button>
+            <button class="btn" id="startAuditBtn" type="button">
+              Start My Audit
+            </button>
             <a href="#compare" class="btn ghost">How we’re different</a>
           </div>
         </div>
@@ -37,7 +48,7 @@
 
     <!-- WHAT THE AUDIT DOES -->
     <section id="audit" class="section">
-      <div class="frame" style="grid-template-columns:.9fr 1.1fr">
+      <div class="frame frame--audit">
         <div class="copy">
           <h2>Most people aren’t misunderstood, they’re not <br> seen the way they intend.</h2>
 
@@ -55,23 +66,23 @@
         </div>
 
         <div class="photo">
-          <img src="assets/Image 2.jpg" alt="Audit metaphor"/>
+          <img src="assets/Image 2.jpg" alt="Audit metaphor" />
         </div>
       </div>
     </section>
 
     <!-- PR vs PA (Canvas Reveal) -->
     <section id="compare" class="section">
-      <div class="frame" style="grid-template-columns:1.1fr .9fr">
+      <div class="frame frame--compare">
         <div class="photo">
           <div class="stage-label">
-            MOVE YOUR CURSOR ACROSS THE IMAGE TO REVEAL
           </div>
           <div class="stage" id="stage">
-            <img id="stageImage" src="assets/Image3.jpg" alt="PR vs PA">
+            <img id="stageImage" src="assets/Image3.jpg" alt="PR vs PA" />
             <canvas id="revealCanvas"></canvas>
           </div>
         </div>
+
         <div class="copy">
           <div class="kicker">How are we different</div>
           <h2>PR vs Perception Architecture</h2>
@@ -117,10 +128,11 @@
 
     <!-- SCORECARD -->
     <section id="score" class="section">
-      <div class="frame" style="grid-template-columns:.85fr 1.15fr">
+      <div class="frame frame--score">
         <div class="copy">
           <h2>Your Scorecard (preview)</h2>
           <p class="muted">Just the signals that change memory. Nothing else.</p>
+
           <div class="scorewrap">
             <div class="muted">Overall score</div>
             <div class="meter"><span style="width:76%"></span></div>
@@ -142,14 +154,20 @@
                 <div class="meter"><span style="width:81%"></span></div>
               </div>
             </div>
-            <p class="muted" style="margin-top:16px">Ahead of <strong>62%</strong> of peers in your role.</p>
+            <p class="muted" style="margin-top:16px">
+              Ahead of <strong>62%</strong> of peers in your role.
+            </p>
           </div>
+
           <div class="cta" style="margin-top:14px">
             <a href="#fix" class="btn">Generate my real score</a>
             <a href="#fix" class="btn ghost">Compare with a friend</a>
           </div>
         </div>
-        <div class="photo"><img src="assets/Image4.jpg" alt="Perspective"/></div>
+
+        <div class="photo">
+          <img src="assets/Image4.jpg" alt="Perspective" />
+        </div>
       </div>
     </section>
 
@@ -200,7 +218,9 @@
           </div>
         </div>
 
-        <p class="narr-center">And that’s how TPS was born. Where psychology meets design. Where thinking meets execution.</p>
+        <p class="narr-center">
+          And that’s how TPS was born. Where psychology meets design. Where thinking meets execution.
+        </p>
       </div>
     </section>
 
@@ -221,7 +241,9 @@
               <div class="ans diya">
                 <div class="bubble reply">
                   <span class="avatar diya" aria-hidden="true">D</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
                     <ul class="check">
                       <li>Branding <em>tells</em>; PA <em>measures what sticks</em>.</li>
@@ -231,10 +253,13 @@
                   </div>
                 </div>
               </div>
+
               <div class="ans vivek">
                 <div class="bubble reply">
                   <span class="avatar vivek" aria-hidden="true">V</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
                     <blockquote>
                       Branding is the mask you wear.
@@ -257,7 +282,9 @@
               <div class="ans diya">
                 <div class="bubble reply">
                   <span class="avatar diya" aria-hidden="true">D</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
                     <ul class="check">
                       <li>PR = distribution; PA = memory installation.</li>
@@ -268,10 +295,13 @@
                   </div>
                 </div>
               </div>
+
               <div class="ans vivek">
                 <div class="bubble reply">
                   <span class="avatar vivek" aria-hidden="true">V</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
                     <blockquote>
                       PR is a trumpet. PA is the room’s acoustics:
@@ -293,7 +323,9 @@
               <div class="ans diya">
                 <div class="bubble reply">
                   <span class="avatar diya" aria-hidden="true">D</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
                     <ul class="check">
                       <li>3-second headline test (first-impression speed).</li>
@@ -305,10 +337,13 @@
                   </div>
                 </div>
               </div>
+
               <div class="ans vivek">
                 <div class="bubble reply">
                   <span class="avatar vivek" aria-hidden="true">V</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
                     <blockquote>
                       Memory compresses experience. We test what compresses:
@@ -330,7 +365,9 @@
               <div class="ans diya">
                 <div class="bubble reply">
                   <span class="avatar diya" aria-hidden="true">D</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
                     <ul class="check">
                       <li>Upload both LinkedIn/Resumes.</li>
@@ -340,12 +377,17 @@
                   </div>
                 </div>
               </div>
+
               <div class="ans vivek">
                 <div class="bubble reply">
                   <span class="avatar vivek" aria-hidden="true">V</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
-                    <blockquote>Comparison reveals edges. Edges create memory.</blockquote>
+                    <blockquote>
+                      Comparison reveals edges. Edges create memory.
+                    </blockquote>
                   </div>
                 </div>
               </div>
@@ -362,7 +404,9 @@
               <div class="ans diya">
                 <div class="bubble reply">
                   <span class="avatar diya" aria-hidden="true">D</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
                     <ul class="check">
                       <li>Quick Scan: 24h.</li>
@@ -372,12 +416,17 @@
                   </div>
                 </div>
               </div>
+
               <div class="ans vivek">
                 <div class="bubble reply">
                   <span class="avatar vivek" aria-hidden="true">V</span>
-                  <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <div class="typing" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="atext">
-                    <blockquote>Clarity itself is speed. And speed is kindness.</blockquote>
+                    <blockquote>
+                      Clarity itself is speed. And speed is kindness.
+                    </blockquote>
                   </div>
                 </div>
               </div>
@@ -390,10 +439,16 @@
           <div class="panel-card">
             <div class="panel-title">Answer Voice</div>
             <div class="persona-toggle" role="tablist">
-              <button id="p-diya" class="pbtn active" aria-pressed="true">Diya - Strategy</button>
-              <button id="p-vivek" class="pbtn" aria-pressed="false">Vivek - Philosophy</button>
+              <button id="p-diya" class="pbtn active" aria-pressed="true">
+                Diya - Strategy
+              </button>
+              <button id="p-vivek" class="pbtn" aria-pressed="false">
+                Vivek - Philosophy
+              </button>
             </div>
-            <p class="muted small">Switch the voice for every open answer.</p>
+            <p class="muted small">
+              Switch the voice for every open answer.
+            </p>
           </div>
         </aside>
       </div>
@@ -401,48 +456,43 @@
 
   </div><!-- /.wrap -->
 
-         <footer class="footer">
-  <div class="foot-inner">
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="foot-inner">
+      <div class="foot-row foot-top">
+        <!-- LEFT SIDE -->
+        <div class="foot-left">
+          <div class="foot-tagline">
+            Designed to make you seen, not loud.
+          </div>
+          <div class="foot-copy">
+            © 2025 The Perception Studio
+          </div>
+        </div>
 
-    <div class="foot-row foot-top">
+        <!-- RIGHT SIDE -->
+        <div class="foot-right">
+          <nav class="foot-legal">
+            <a href="contact.html">Contact</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+            <a href="#privacy">Privacy Policy</a>
+          </nav>
 
-      <!-- LEFT SIDE -->
-      <div class="foot-left">
-        <div class="foot-tagline">Designed to make you seen, not loud.</div>
-        <div class="foot-copy">© 2025 The Perception Studio</div>
-      </div>
+          <div class="foot-social">
+            <a class="social-icon li"
+               href="https://www.linkedin.com/company/the-perception-studio/"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="The Perception Studio on LinkedIn">in</a>
 
-      <!-- RIGHT SIDE -->
-      <div class="foot-right">
-        <nav class="foot-legal">
-          <a href="contact.html">Contact</a>
-          <a href="terms.html">Terms &amp; Conditions</a>
-          <a href="#privacy">Privacy Policy</a>
-        </nav>
-
-        <div class="foot-social">
-            <div class="foot-social">
-          <a class="social-icon li" href="https://www.linkedin.com/company/the-perception-studio/" target="_blank" rel="noopener noreferrer"
-            aria-label="The Perception Studio on LinkedIn">in</a>
-
-          <a class="social-icon ig" href="https://www.instagram.com/theperception.studio/" target="_blank" rel="noopener noreferrer"
-            aria-label="The Perception Studio on Instagram">IG</a>
+            <a class="social-icon ig"
+               href="https://www.instagram.com/theperception.studio/"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="The Perception Studio on Instagram">IG</a>
+          </div>
         </div>
       </div>
-
     </div>
-
-  </div>
-</footer>
-
-
-
-  </div><!-- /.wrap -->
-
-  <!-- ========= FULL-SCREEN AUDIT OVERLAY ========= -->
-  <!-- (rest of your HTML stays the same) -->
-
-
+  </footer>
 
   <!-- ========= FULL-SCREEN AUDIT OVERLAY ========= -->
   <div class="audit-overlay" id="auditOverlay" aria-hidden="true">
@@ -454,6 +504,7 @@
           <span class="audit-kicker">Perception Audit</span>
           <span class="audit-step-label" id="progressText">Intro</span>
         </div>
+
         <div class="audit-progress">
           <div class="audit-progress-bar"></div>
         </div>
@@ -463,7 +514,7 @@
         </button>
       </header>
 
-      <!-- Main audit form -->
+      <!-- Main audit form (notebook-style single sheet flip) -->
       <form
         id="auditForm"
         class="audit-form"
@@ -471,240 +522,243 @@
         method="POST"
         enctype="multipart/form-data"
       >
-
-        <!-- STEP 0: welcome -->
-        <section class="audit-step is-active" data-step="0">
-          <div class="step-layout">
-            <div class="step-copy">
-              <h1 id="auditTitle">See how your online signal is landing.</h1>
-              <p class="lead">
-                A quiet, structured check of how you show up to strangers —
-                not just how it feels from inside.
-              </p>
-              <p class="muted small-text">
-                10 small questions · 2–3 minutes · no right or wrong answers.
-              </p>
-              <button type="button" class="btn js-next">
-                Begin calmly
-              </button>
-            </div>
-
-            <div class="step-visual">
-              <div class="signal-card">
-                <div class="signal-pill"></div>
-                <div class="signal-lines">
-                  <span></span><span></span><span></span>
-                </div>
-                <p>
-                  “Most people aren’t misunderstood, they’re just not seen the way they intend.”
+        <!-- FLIP-BOOK WRAPPER -->
+        <div id="auditBook" class="flip-book">
+          <!-- STEP 0: welcome -->
+          <section class="audit-step page" data-step="0">
+            <div class="step-layout">
+              <div class="step-copy">
+                <h1 id="auditTitle">See how your online signal is landing.</h1>
+                <p class="lead">
+                  A quiet, structured check of how you show up to strangers —
+                  not just how it feels from inside.
                 </p>
+                <p class="muted small-text">
+                  10 small questions · 2–3 minutes · no right or wrong answers.
+                </p>
+                <button type="button" class="btn js-next">
+                  Begin calmly
+                </button>
+              </div>
+
+              <div class="step-visual">
+                <div class="signal-card">
+                  <div class="signal-pill"></div>
+                  <div class="signal-lines">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <p>
+                    “Most people aren’t misunderstood, they’re just not seen the way they intend.”
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- STEP 1 -->
-        <section class="audit-step" data-step="1">
-          <h2>Let’s start with the basics.</h2>
-          <p class="muted small-text">Just enough so we know who we’re reading for.</p>
+          <!-- STEP 1 -->
+          <section class="audit-step page" data-step="1">
+            <h2>Let’s start with the basics.</h2>
+            <p class="muted small-text">Just enough so we know who we’re reading for.</p>
 
-          <label class="field">
-            <span class="field-label required">Hey, what should we call you?</span>
-            <input type="text" name="name" required/>
-          </label>
-
-          <label class="field">
-            <span class="field-label required">
-              Could you share one link that represents you best?
-            </span>
-            <span class="field-hint">
-              LinkedIn, website, Instagram — anything you like.
-            </span>
-            <input type="url" name="main_link" required/>
-          </label>
-
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="button" class="btn js-next">Next</button>
-          </div>
-        </section>
-
-        <!-- STEP 2 -->
-        <section class="audit-step" data-step="2">
-          <h2>How would you describe what you do?</h2>
-          <p class="field-hint">Choose the one that feels closest right now.</p>
-
-          <div class="choice-grid" data-name="work_type" data-type="single">
-            <button type="button" data-value="job">I work a job</button>
-            <button type="button" data-value="business">I run a business</button>
-            <button type="button" data-value="freelance">I freelance</button>
-            <button type="button" data-value="create">I create</button>
-            <button type="button" data-value="figuring">Still figuring it out</button>
-          </div>
-          <input type="hidden" name="work_type" required/>
-
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="button" class="btn js-next">Next</button>
-          </div>
-        </section>
-
-        <!-- STEP 3 -->
-        <section class="audit-step" data-step="3">
-          <h2>
-            When people see your profile today,<br/>
-            what do you think they notice first?
-          </h2>
-
-          <div class="choice-grid" data-name="notice_first" data-type="single">
-            <button type="button" data-value="work">My work</button>
-            <button type="button" data-value="picture">My picture</button>
-            <button type="button" data-value="words">My words</button>
-            <button type="button" data-value="achievements">My achievements</button>
-            <button type="button" data-value="not_sure">I’m not sure</button>
-          </div>
-          <input type="hidden" name="notice_first" required/>
-
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="button" class="btn js-next">Next</button>
-          </div>
-        </section>
-
-        <!-- STEP 4 -->
-        <section class="audit-step" data-step="4">
-          <h2>
-            And how would you like people to feel<br/>
-            when they see your profile?
-          </h2>
-          <p class="field-hint">Choose any that feel true.</p>
-
-          <div class="choice-grid" data-name="desired_feel" data-type="multi">
-            <button type="button" data-value="trust">Trust</button>
-            <button type="button" data-value="clarity">Clarity</button>
-            <button type="button" data-value="interest">Interest</button>
-            <button type="button" data-value="respect">Respect</button>
-            <button type="button" data-value="talk_to_me">
-              “I’d like to talk to this person”
-            </button>
-          </div>
-          <input type="hidden" name="desired_feel"/>
-
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="button" class="btn js-next">Next</button>
-          </div>
-        </section>
-
-        <!-- STEP 5 -->
-        <section class="audit-step" data-step="5">
-          <h2>Which of these feels closest to your situation right now?</h2>
-
-          <div class="choice-stack" data-name="situation" data-type="single">
-            <button type="button" data-value="good_work_hidden">
-              I’ve done good work, but it doesn’t show
-            </button>
-            <button type="button" data-value="potential_not_seen">
-              People don’t see my potential
-            </button>
-            <button type="button" data-value="needs_refresh">
-              My profile needs a refresh
-            </button>
-            <button type="button" data-value="something_off">
-              I’m not sure what’s off, but something is
-            </button>
-            <button type="button" data-value="look_like_me">
-              I just want things to look like me
-            </button>
-          </div>
-          <input type="hidden" name="situation" required/>
-
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="button" class="btn js-next">Next</button>
-          </div>
-        </section>
-
-        <!-- STEP 6 -->
-        <section class="audit-step" data-step="6">
-          <h2>Anything you’d like us to look at?</h2>
-          <p class="field-hint">Posts, links, notes — totally optional.</p>
-
-          <label class="field">
-            <textarea name="extra_links" rows="4"
-              placeholder="Paste any links or notes here (optional)"></textarea>
-          </label>
-
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="button" class="btn js-next">Next</button>
-          </div>
-        </section>
-
-        <!-- STEP 7 -->
-        <section class="audit-step" data-step="7">
-          <h2>Photo for this audit</h2>
-          <p class="field-hint">You can always change it later.</p>
-
-          <div class="choice-grid" data-name="photo_choice" data-type="single">
-            <button type="button" data-value="current">Use the current one</button>
-            <button type="button" data-value="upload">I’ll upload one</button>
-            <button type="button" data-value="skip">Skip</button>
-          </div>
-          <input type="hidden" name="photo_choice" required/>
-
-          <div id="photoUploadWrap" class="upload-wrap is-hidden">
-            <label class="upload-label">
-              <span class="field-label">Upload a photo</span>
-              <input type="file" name="photo_file" accept="image/*"/>
+            <label class="field">
+              <span class="field-label required">Hey, what should we call you?</span>
+              <input type="text" name="name" required />
             </label>
-          </div>
 
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="button" class="btn js-next">Next</button>
-          </div>
-        </section>
+            <label class="field">
+              <span class="field-label required">
+                Could you share one link that represents you best?
+              </span>
+              <span class="field-hint">
+                LinkedIn, website, Instagram — anything you like.
+              </span>
+              <input type="url" name="main_link" required />
+            </label>
 
-        <!-- STEP 8 -->
-        <section class="audit-step" data-step="8">
-          <h2>In one simple line…</h2>
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="button" class="btn js-next">Next</button>
+            </div>
+          </section>
 
-          <label class="field">
-            <span class="field-label required">
-              what do you wish your online presence could do for you?
-            </span>
-            <input type="text" name="presence_goal" required/>
-          </label>
+          <!-- STEP 2 -->
+          <section class="audit-step page" data-step="2">
+            <h2>How would you describe what you do?</h2>
+            <p class="field-hint">Choose the one that feels closest right now.</p>
 
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="button" class="btn js-next">Next</button>
-          </div>
-        </section>
+            <div class="choice-grid" data-name="work_type" data-type="single">
+              <button type="button" data-value="job">I work a job</button>
+              <button type="button" data-value="business">I run a business</button>
+              <button type="button" data-value="freelance">I freelance</button>
+              <button type="button" data-value="create">I create</button>
+              <button type="button" data-value="figuring">Still figuring it out</button>
+            </div>
+            <input type="hidden" name="work_type" required />
 
-        <!-- STEP 9 -->
-        <section class="audit-step" data-step="9">
-          <h2>How soon would you like to see improvements?</h2>
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="button" class="btn js-next">Next</button>
+            </div>
+          </section>
 
-          <div class="choice-grid" data-name="timeline" data-type="single">
-            <button type="button" data-value="now">Right away</button>
-            <button type="button" data-value="month">This month</button>
-            <button type="button" data-value="quarter">This quarter</button>
-            <button type="button" data-value="exploring">Just exploring</button>
-          </div>
-          <input type="hidden" name="timeline" required/>
+          <!-- STEP 3 -->
+          <section class="audit-step page" data-step="3">
+            <h2>
+              When people see your profile today,<br />
+              what do you think they notice first?
+            </h2>
 
-          <p class="field-hint">
-            This only helps us pace our suggestions — nothing rigid.
-          </p>
+            <div class="choice-grid" data-name="notice_first" data-type="single">
+              <button type="button" data-value="work">My work</button>
+              <button type="button" data-value="picture">My picture</button>
+              <button type="button" data-value="words">My words</button>
+              <button type="button" data-value="achievements">My achievements</button>
+              <button type="button" data-value="not_sure">I’m not sure</button>
+            </div>
+            <input type="hidden" name="notice_first" required />
 
-          <div class="nav-row">
-            <button type="button" class="btn ghost js-back">Back</button>
-            <button type="submit" class="btn">Submit audit</button>
-          </div>
-        </section>
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="button" class="btn js-next">Next</button>
+            </div>
+          </section>
 
+          <!-- STEP 4 -->
+          <section class="audit-step page" data-step="4">
+            <h2>
+              And how would you like people to feel<br />
+              when they see your profile?
+            </h2>
+            <p class="field-hint">Choose any that feel true.</p>
+
+            <div class="choice-grid" data-name="desired_feel" data-type="multi">
+              <button type="button" data-value="trust">Trust</button>
+              <button type="button" data-value="clarity">Clarity</button>
+              <button type="button" data-value="interest">Interest</button>
+              <button type="button" data-value="respect">Respect</button>
+              <button type="button" data-value="talk_to_me">
+                “I’d like to talk to this person”
+              </button>
+            </div>
+            <input type="hidden" name="desired_feel" />
+
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="button" class="btn js-next">Next</button>
+            </div>
+          </section>
+
+          <!-- STEP 5 -->
+          <section class="audit-step page" data-step="5">
+            <h2>Which of these feels closest to your situation right now?</h2>
+
+            <div class="choice-stack" data-name="situation" data-type="single">
+              <button type="button" data-value="good_work_hidden">
+                I’ve done good work, but it doesn’t show
+              </button>
+              <button type="button" data-value="potential_not_seen">
+                People don’t see my potential
+              </button>
+              <button type="button" data-value="needs_refresh">
+                My profile needs a refresh
+              </button>
+              <button type="button" data-value="something_off">
+                I’m not sure what’s off, but something is
+              </button>
+              <button type="button" data-value="look_like_me">
+                I just want things to look like me
+              </button>
+            </div>
+            <input type="hidden" name="situation" required />
+
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="button" class="btn js-next">Next</button>
+            </div>
+          </section>
+
+          <!-- STEP 6 -->
+          <section class="audit-step page" data-step="6">
+            <h2>Anything you’d like us to look at?</h2>
+            <p class="field-hint">Posts, links, notes — totally optional.</p>
+
+            <label class="field">
+              <textarea
+                name="extra_links"
+                rows="4"
+                placeholder="Paste any links or notes here (optional)"></textarea>
+            </label>
+
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="button" class="btn js-next">Next</button>
+            </div>
+          </section>
+
+          <!-- STEP 7 -->
+          <section class="audit-step page" data-step="7">
+            <h2>Photo for this audit</h2>
+            <p class="field-hint">You can always change it later.</p>
+
+            <div class="choice-grid" data-name="photo_choice" data-type="single">
+              <button type="button" data-value="current">Use the current one</button>
+              <button type="button" data-value="upload">I’ll upload one</button>
+              <button type="button" data-value="skip">Skip</button>
+            </div>
+            <input type="hidden" name="photo_choice" required />
+
+            <div id="photoUploadWrap" class="upload-wrap is-hidden">
+              <label class="upload-label">
+                <span class="field-label">Upload a photo</span>
+                <input type="file" name="photo_file" accept="image/*" />
+              </label>
+            </div>
+
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="button" class="btn js-next">Next</button>
+            </div>
+          </section>
+
+          <!-- STEP 8 -->
+          <section class="audit-step page" data-step="8">
+            <h2>In one simple line…</h2>
+
+            <label class="field">
+              <span class="field-label required">
+                what do you wish your online presence could do for you?
+              </span>
+              <input type="text" name="presence_goal" required />
+            </label>
+
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="button" class="btn js-next">Next</button>
+            </div>
+          </section>
+
+          <!-- STEP 9 -->
+          <section class="audit-step page" data-step="9">
+            <h2>How soon would you like to see improvements?</h2>
+
+            <div class="choice-grid" data-name="timeline" data-type="single">
+              <button type="button" data-value="now">Right away</button>
+              <button type="button" data-value="month">This month</button>
+              <button type="button" data-value="quarter">This quarter</button>
+              <button type="button" data-value="exploring">Just exploring</button>
+            </div>
+            <input type="hidden" name="timeline" required />
+
+            <p class="field-hint">
+              This only helps us pace our suggestions — nothing rigid.
+            </p>
+
+            <div class="nav-row">
+              <button type="button" class="btn ghost js-back">Back</button>
+              <button type="submit" class="btn">Submit audit</button>
+            </div>
+          </section>
+        </div>
       </form>
 
       <!-- THANK-YOU STATE -->
@@ -719,16 +773,18 @@
 
         <div class="btn-row">
           <button type="button" class="btn" id="auditCloseAfter">
-            Close & return to the page
+            Close &amp; return to the page
           </button>
         </div>
       </div>
-
     </div>
   </div>
-
   <!-- ========= END AUDIT OVERLAY ========= -->
 
+  <!-- PageFlip JS (safe to keep, not used directly) -->
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+  <!-- Main JS -->
   <script src="script.js"></script>
 </body>
 </html>

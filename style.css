@@ -316,6 +316,11 @@ p, .muted, li { font-size:1rem; }
   background:#ececec;
   overflow:hidden;
 }
+/* Scorecard button font size override */
+#score .btn{
+  font-size:0.90rem;   /* change this value to whatever you want */
+  padding:12px 22px;    /* optional: adjust padding if needed */
+}
 .meter>span{
   display:block;
   height:10px;

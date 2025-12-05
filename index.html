@@ -5,25 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TPS - Perception Architecture (Preview v9)</title>
 
-  <!-- PageFlip CSS (loaded but not used directly; our flip is custom) -->
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/page-flip/dist/css/page-flip.min.css" />
 
-  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- PAGE WRAPPER -->
-  <div class="wrap">
 
-    <!-- HERO -->
-    <section class="section is-visible">
+  <section class="section is-visible">
+    <div class="wrap">
       <div class="frame">
         <div class="photo">
           <img src="assets/Image1.jpg" alt="Hero Image" />
         </div>
         <div class="copy">
-          <!-- Accessible H1 for SEO/semantics while visual headline stays as rotating questions -->
           <h1 class="visually-hidden">
             Perception Audit - See how the world reads you online
           </h1>
@@ -44,10 +39,11 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- WHAT THE AUDIT DOES -->
-    <section id="audit" class="section">
+  <section id="audit" class="section">
+    <div class="wrap">
       <div class="frame frame--audit">
         <div class="copy">
           <h2>Most people aren’t misunderstood, they’re not <br> seen the way they intend.</h2>
@@ -69,14 +65,15 @@
           <img src="assets/Image 2.jpg" alt="Audit metaphor" />
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PR vs PA (Canvas Reveal) -->
-    <section id="compare" class="section">
+  <section id="compare" class="section">
+    <div class="wrap">
       <div class="frame frame--compare">
         <div class="photo">
           <div class="stage-label">
-          </div>
+            </div>
           <div class="stage" id="stage">
             <img id="stageImage" src="assets/Image3.jpg" alt="PR vs PA" />
             <canvas id="revealCanvas"></canvas>
@@ -100,7 +97,6 @@
             </button>
           </div>
 
-          <!-- both definitions live here, one on top of the other -->
           <p class="definition pr-copy active">
             <strong>PR</strong> shows only the slice someone notices in the moment.<br>
             Nothing connects. Nothing stays.
@@ -111,7 +107,6 @@
             so the version of you that’s accurate becomes the version people remember.
           </p>
 
-          <!-- anchor/subline stays below the definitions -->
           <p class="prpa-anchor">
             Most people aren’t seen incorrectly - they’re seen incompletely.<br>
             <span>Perception Architecture reveals the whole picture.</span>
@@ -124,10 +119,11 @@
           <div class="hr"></div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SCORECARD -->
-    <section id="score" class="section">
+  <section id="score" class="section">
+    <div class="wrap">
       <div class="frame frame--score">
         <div class="copy">
           <h2>Your Scorecard (preview)</h2>
@@ -169,10 +165,11 @@
           <img src="assets/Image4.jpg" alt="Perspective" />
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- DIALOGUE — left/right chat layout -->
-    <section id="dialogue" class="section">
+  <section id="dialogue" class="section">
+    <div class="wrap">
       <div class="dialogue chat-layout">
         <h2 class="chat-title">The conversation that built TPS</h2>
 
@@ -222,16 +219,15 @@
           And that’s how TPS was born. Where psychology meets design. Where thinking meets execution.
         </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="section">
+  <section id="faq" class="section">
+    <div class="wrap">
       <div class="faq-grid" data-mode="diya">
-        <!-- LEFT: FAQs -->
         <div class="faq-col">
           <h2>FAQ - fast and honest</h2>
 
-          <!-- 1 -->
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
@@ -272,7 +268,6 @@
             </div>
           </details>
 
-          <!-- 2 -->
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
@@ -313,7 +308,6 @@
             </div>
           </details>
 
-          <!-- 3 -->
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
@@ -355,7 +349,6 @@
             </div>
           </details>
 
-          <!-- 4 -->
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
@@ -394,7 +387,6 @@
             </div>
           </details>
 
-          <!-- 5 -->
           <details class="qa">
             <summary>
               <span class="avatar user" aria-hidden="true">?</span>
@@ -434,7 +426,6 @@
           </details>
         </div>
 
-        <!-- RIGHT: Persona toggle -->
         <aside class="persona-panel" aria-label="Answer voice">
           <div class="panel-card">
             <div class="panel-title">Answer Voice</div>
@@ -452,15 +443,18 @@
           </div>
         </aside>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </div><!-- /.wrap -->
+  <div class="footer-ethos">
+    <div class="footer-ethos-inner">
+      <p>The only way to win the future is to design your memory.</p>
+    </div>
+  </div>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="foot-inner">
       <div class="foot-row foot-top">
-        <!-- LEFT SIDE -->
         <div class="foot-left">
           <div class="foot-tagline">
             Designed to make you seen, not loud.
@@ -470,7 +464,6 @@
           </div>
         </div>
 
-        <!-- RIGHT SIDE -->
         <div class="foot-right">
           <nav class="foot-legal">
             <a href="contact.html">Contact</a>
@@ -494,7 +487,6 @@
     </div>
   </footer>
 
-  <!-- ========= FULL-SCREEN AUDIT OVERLAY ========= -->
   <div class="audit-overlay" id="auditOverlay" aria-hidden="true">
     <div class="audit-overlay-backdrop"></div>
 
@@ -514,7 +506,6 @@
         </button>
       </header>
 
-      <!-- Main audit form (notebook-style single sheet flip) -->
       <form
         id="auditForm"
         class="audit-form"
@@ -522,9 +513,7 @@
         method="POST"
         enctype="multipart/form-data"
       >
-        <!-- FLIP-BOOK WRAPPER -->
         <div id="auditBook" class="flip-book">
-          <!-- STEP 0: welcome -->
           <section class="audit-step page" data-step="0">
             <div class="step-layout">
               <div class="step-copy">
@@ -555,7 +544,6 @@
             </div>
           </section>
 
-          <!-- STEP 1 -->
           <section class="audit-step page" data-step="1">
             <h2>Let’s start with the basics.</h2>
             <p class="muted small-text">Just enough so we know who we’re reading for.</p>
@@ -581,7 +569,6 @@
             </div>
           </section>
 
-          <!-- STEP 2 -->
           <section class="audit-step page" data-step="2">
             <h2>How would you describe what you do?</h2>
             <p class="field-hint">Choose the one that feels closest right now.</p>
@@ -601,7 +588,6 @@
             </div>
           </section>
 
-          <!-- STEP 3 -->
           <section class="audit-step page" data-step="3">
             <h2>
               When people see your profile today,<br />
@@ -623,7 +609,6 @@
             </div>
           </section>
 
-          <!-- STEP 4 -->
           <section class="audit-step page" data-step="4">
             <h2>
               And how would you like people to feel<br />
@@ -648,7 +633,6 @@
             </div>
           </section>
 
-          <!-- STEP 5 -->
           <section class="audit-step page" data-step="5">
             <h2>Which of these feels closest to your situation right now?</h2>
 
@@ -677,7 +661,6 @@
             </div>
           </section>
 
-          <!-- STEP 6 -->
           <section class="audit-step page" data-step="6">
             <h2>Anything you’d like us to look at?</h2>
             <p class="field-hint">Posts, links, notes — totally optional.</p>
@@ -695,7 +678,6 @@
             </div>
           </section>
 
-          <!-- STEP 7 -->
           <section class="audit-step page" data-step="7">
             <h2>Photo for this audit</h2>
             <p class="field-hint">You can always change it later.</p>
@@ -720,7 +702,6 @@
             </div>
           </section>
 
-          <!-- STEP 8 -->
           <section class="audit-step page" data-step="8">
             <h2>In one simple line…</h2>
 
@@ -737,7 +718,6 @@
             </div>
           </section>
 
-          <!-- STEP 9 -->
           <section class="audit-step page" data-step="9">
             <h2>How soon would you like to see improvements?</h2>
 
@@ -761,7 +741,6 @@
         </div>
       </form>
 
-      <!-- THANK-YOU STATE -->
       <div class="audit-thanks" id="auditThanks">
         <h2>Thank you — your signal is in.</h2>
         <p class="muted small-text">
@@ -779,12 +758,8 @@
       </div>
     </div>
   </div>
-  <!-- ========= END AUDIT OVERLAY ========= -->
-
-  <!-- PageFlip JS (safe to keep, not used directly) -->
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
 
-  <!-- Main JS -->
   <script src="script.js"></script>
 </body>
 </html>

@@ -243,23 +243,26 @@
   observer.observe(ethos);
 })();
 
-// ===== AUDIT OVERLAY (full-screen, same page) =====
+// ===== AUDIT OVERLAY (single-page notebook flip) =====
 (() => {
   const overlay = document.getElementById('auditOverlay');
   const openBtn = document.getElementById('startAuditBtn');
   const closeBtn = document.getElementById('auditCloseBtn');
   const form = document.getElementById('auditForm');
-  const steps = Array.from(document.querySelectorAll('.audit-step'));
   const progressBar = document.querySelector('.audit-progress-bar');
   const progressText = document.getElementById('progressText');
   const thanksBlock = document.getElementById('auditThanks');
   const closeAfterBtn = document.getElementById('auditCloseAfter');
 
-  if (!overlay || !openBtn || !form || !steps.length || !progressBar || !progressText) return;
+  if (!overlay || !openBtn || !form || !progressBar || !progressText) return;
 
-  const totalQuestionSteps = 9; // steps 1..9 (0 is intro)
+  const steps = Array.from(document.querySelectorAll('.audit-step'));
+  const totalQuestionSteps = 9;   // Steps 1..9 (0 = intro)
+  const FLIP_DURATION = 550;      // ms – sync with CSS if animated
+
   let current = 0;
 
+  // ----- helpers -----
   function lockScroll() {
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
@@ -270,30 +273,24 @@
     document.body.style.overflow = '';
   }
 
+  function scrollShellTop() {
+    const shell = overlay.querySelector('.audit-overlay-shell');
+    if (shell) shell.scrollTop = 0;
+  }
+
   function resetFormUI() {
     form.reset();
     document
       .querySelectorAll('.choice-grid button, .choice-stack button')
       .forEach(btn => btn.classList.remove('is-selected'));
+
     const wrap = document.getElementById('photoUploadWrap');
     if (wrap) wrap.classList.add('is-hidden');
-  }
 
-  function openOverlay() {
-    overlay.classList.add('is-open');
-    overlay.setAttribute('aria-hidden', 'false');
-    lockScroll();
-
-    form.style.display = 'block';
-    thanksBlock?.classList.remove('is-visible');
-    resetFormUI();
-    showStep(0);
-  }
-
-  function closeOverlay() {
-    overlay.classList.remove('is-open');
-    overlay.setAttribute('aria-hidden', 'true');
-    unlockScroll();
+    // clear error highlights
+    form.querySelectorAll('.field-error').forEach(el =>
+      el.classList.remove('field-error')
+    );
   }
 
   function updateProgress(stepIndex) {
@@ -302,20 +299,10 @@
       progressText.textContent = 'Intro';
       return;
     }
-    const logical = stepIndex;
+    const logical = stepIndex; // 1..9
     const pct = (logical / totalQuestionSteps) * 100;
     progressBar.style.width = pct + '%';
     progressText.textContent = `Step ${logical} of ${totalQuestionSteps}`;
-  }
-
-  function showStep(i) {
-    if (i < 0 || i >= steps.length) return;
-    steps.forEach(s => s.classList.remove('is-active'));
-    steps[i].classList.add('is-active');
-    current = i;
-    updateProgress(i);
-    const shell = overlay.querySelector('.audit-overlay-shell');
-    if (shell) shell.scrollTop = 0;
   }
 
   function validateStep(stepIndex) {
@@ -323,6 +310,7 @@
     if (!section) return true;
 
     let valid = true;
+
     section.querySelectorAll('.field-error').forEach(el =>
       el.classList.remove('field-error')
     );
@@ -351,16 +339,78 @@
     if (thanksBlock) {
       thanksBlock.classList.add('is-visible');
     }
-    const shell = overlay.querySelector('.audit-overlay-shell');
-    if (shell) shell.scrollTop = 0;
+    scrollShellTop();
+  }
+
+  // ----- step control (single sheet flip) -----
+  function initSteps() {
+    steps.forEach((step, idx) => {
+      step.style.display = idx === 0 ? 'block' : 'none';
+      step.classList.remove('page-flip-out', 'page-incoming');
+    });
+    current = 0;
+    updateProgress(0);
+    scrollShellTop();
+  }
+
+  function goToStep(nextIndex) {
+    if (nextIndex < 0 || nextIndex >= steps.length || nextIndex === current) {
+      return;
+    }
+
+    const oldStep = steps[current];
+    const newStep = steps[nextIndex];
+
+    // Prepare incoming page
+    newStep.style.display = 'block';
+    newStep.classList.add('page-incoming');
+
+    // Animate outgoing page
+    if (oldStep) {
+      oldStep.classList.remove('page-incoming');
+      oldStep.classList.add('page-flip-out');
+    }
+
+    // After "flip" duration, keep only new visible
+    setTimeout(() => {
+      steps.forEach((step, idx) => {
+        step.classList.remove('page-flip-out', 'page-incoming');
+        step.style.display = idx === nextIndex ? 'block' : 'none';
+      });
+    }, FLIP_DURATION);
+
+    current = nextIndex;
+    updateProgress(current);
+    scrollShellTop();
+  }
+
+  // ----- open / close overlay -----
+  function openOverlay() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    lockScroll();
+
+    form.style.display = 'block';
+    thanksBlock?.classList.remove('is-visible');
+    resetFormUI();
+    initSteps();
+  }
+
+  function closeOverlay() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    unlockScroll();
   }
 
   openBtn.addEventListener('click', openOverlay);
   closeBtn?.addEventListener('click', closeOverlay);
   closeAfterBtn?.addEventListener('click', closeOverlay);
 
+  // click on backdrop (not inner card) closes
   overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeOverlay();
+    if (e.target.classList.contains('audit-overlay-backdrop')) {
+      closeOverlay();
+    }
   });
 
   document.addEventListener('keydown', e => {
@@ -369,19 +419,7 @@
     }
   });
 
-  document.querySelectorAll('.js-next').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (current !== 0 && !validateStep(current)) return;
-      showStep(current + 1);
-    });
-  });
-
-  document.querySelectorAll('.js-back').forEach(btn => {
-    btn.addEventListener('click', () => {
-      showStep(current - 1);
-    });
-  });
-
+  // ----- choice groups (single + multi) -----
   function initChoiceGroup(group) {
     const name = group.dataset.name;
     const type = group.dataset.type;
@@ -406,6 +444,7 @@
         if (hidden) hidden.value = selected.join(',');
       }
 
+      // Special: photo upload reveal
       if (name === 'photo_choice') {
         const wrap = document.getElementById('photoUploadWrap');
         if (!wrap) return;
@@ -419,6 +458,21 @@
     .querySelectorAll('.choice-grid, .choice-stack')
     .forEach(initChoiceGroup);
 
+  // ----- next / back buttons -----
+  document.querySelectorAll('.js-next').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!validateStep(current)) return;
+      goToStep(current + 1);
+    });
+  });
+
+  document.querySelectorAll('.js-back').forEach(btn => {
+    btn.addEventListener('click', () => {
+      goToStep(current - 1);
+    });
+  });
+
+  // ----- submit -----
   form.addEventListener('submit', async e => {
     if (!validateStep(current)) {
       e.preventDefault();
@@ -448,4 +502,3 @@
     showThanks();
   });
 })();
- 

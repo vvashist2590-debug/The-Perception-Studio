@@ -1230,3 +1230,23 @@ summary::marker{content:"";}
     justify-content:flex-start;
   }
 }
+
+
+
+
+
+
+
+/* Mobile tweaks for hero / images */
+@media (max-width:700px){
+  /* let the card height be closer to content on phones */
+  .photo,
+  .stage{
+    min-height:260px;      /* smaller, calm card */
+  }
+
+  .photo img,
+  .stage img{
+    height:auto;           /* don't stretch to fill tall box */
+  }
+}

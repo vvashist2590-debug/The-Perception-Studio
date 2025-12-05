@@ -58,7 +58,12 @@ p, .muted, li { font-size:1rem; }
 .section .copy > h3 { margin-top:1.1em; }
 
 /* ===== Layout & Scroll Reveal ===== */
-.wrap{max-width:1220px;margin:0 auto;padding:0 22px}
+
+.wrap{
+  max-width:1080px;  /* was 1220px – safer across Mac/Windows */
+  margin:0 auto;
+  padding:0 22px;
+}
 
 .section{
   min-height:auto;
@@ -82,38 +87,24 @@ p, .muted, li { font-size:1rem; }
   transform:translateY(0);
 }
 
-/* Base frame layout */
+/* Base frame layout for two-column sections */
 .frame{
   display:grid;
-  grid-template-columns:1.1fr .9fr; /* default if no modifier class */
+  grid-template-columns:1.1fr .9fr;  /* default ratio */
   gap:72px;
   align-items:center;
 }
 
-/* Section-specific ratios on larger screens */
+/* Section-specific ratios (desktop) */
 .frame--audit{
   grid-template-columns:.9fr 1.1fr;
 }
-
 .frame--compare{
   grid-template-columns:1.1fr .9fr;
 }
-
 .frame--score{
   grid-template-columns:.85fr 1.15fr;
 }
-
-/* Responsive: stack to one column on smaller screens */
-@media (max-width:1020px){
-  .frame{
-    grid-template-columns:1fr;
-    gap:32px;
-  }
-  .grid2{grid-template-columns:1fr}
-  .grid3{grid-template-columns:1fr}
-  .chat-bubble{max-width:100%}
-}
-
 
 .photo{
   border-radius:var(--rad);
@@ -359,7 +350,7 @@ p, .muted, li { font-size:1rem; }
   display:flex;
   flex-direction:column;
   gap:10px;
-  justify-content:space-between;
+  justify-content:between;
   transition:transform 180ms ease-out,box-shadow 180ms ease-out,border-color 180ms.ease-out;
 }
 .card h3{margin:0 0 6px 0}
@@ -707,6 +698,16 @@ summary::marker{content:"";}
 .section-light,
 .section-lighter { transition: background 260ms ease-out; }
 
+/* ===== Responsive tweaks for layout ===== */
+@media (max-width:1020px){
+  .frame{
+    grid-template-columns:1fr;  /* stack columns on smaller screens */
+    gap:32px;
+  }
+  .grid2{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr}
+  .chat-bubble{max-width:100%}
+}
 
 @media (max-width:700px){
   .footer-ethos-inner{
@@ -1229,4 +1230,3 @@ summary::marker{content:"";}
     justify-content:flex-start;
   }
 }
-

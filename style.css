@@ -82,12 +82,38 @@ p, .muted, li { font-size:1rem; }
   transform:translateY(0);
 }
 
+/* Base frame layout */
 .frame{
   display:grid;
-  grid-template-columns:1.1fr .9fr;
+  grid-template-columns:1.1fr .9fr; /* default if no modifier class */
   gap:72px;
   align-items:center;
 }
+
+/* Section-specific ratios on larger screens */
+.frame--audit{
+  grid-template-columns:.9fr 1.1fr;
+}
+
+.frame--compare{
+  grid-template-columns:1.1fr .9fr;
+}
+
+.frame--score{
+  grid-template-columns:.85fr 1.15fr;
+}
+
+/* Responsive: stack to one column on smaller screens */
+@media (max-width:1020px){
+  .frame{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+  .grid2{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr}
+  .chat-bubble{max-width:100%}
+}
+
 
 .photo{
   border-radius:var(--rad);
@@ -144,7 +170,7 @@ p, .muted, li { font-size:1rem; }
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  transition:transform 180ms ease-out,box-shadow 180ms.ease-out,
+  transition:transform 180ms ease-out,box-shadow 180ms ease-out,
              background 180ms ease-out,color 180ms.ease-out,border-color 180ms ease-out;
 }
 .btn:hover{
@@ -531,7 +557,7 @@ summary::marker{content:"";}
 .typing span:nth-child(3){ animation-delay:.3s }
 
 @keyframes blink{
-  0%,60%,100%{ transform:translateY(0); opacity:.4; }
+  0%,60%,100{ transform:translateY(0); opacity:.4; }
   30%{ transform:translateY(-3px); opacity:1; }
 }
 
@@ -681,13 +707,6 @@ summary::marker{content:"";}
 .section-light,
 .section-lighter { transition: background 260ms ease-out; }
 
-/* ===== Responsive tweaks ===== */
-@media (max-width:1020px){
-  .frame{grid-template-columns:1fr}
-  .grid2{grid-template-columns:1fr}
-  .grid3{grid-template-columns:1fr}
-  .chat-bubble{max-width:100%}
-}
 
 @media (max-width:700px){
   .footer-ethos-inner{
@@ -698,7 +717,7 @@ summary::marker{content:"";}
   }
 }
 
-/* === AUDIT OVERLAY === */
+/* === AUDIT OVERLAY + SINGLE-SHEET FLIP NOTEBOOK === */
 
 .audit-overlay{
   position:fixed;
@@ -720,7 +739,7 @@ summary::marker{content:"";}
   backdrop-filter:blur(18px);
 }
 
-/* Shell */
+/* Shell that holds header + card */
 .audit-overlay-shell{
   position:absolute;
   inset:24px;
@@ -729,17 +748,23 @@ summary::marker{content:"";}
   background:#fff;
   border-radius:var(--rad);
   box-shadow:var(--shadow);
-  padding:26px 28px 24px;
   border:1px solid var(--ring);
+
+  /* Only scroll if content is taller than viewport */
+  max-height:92vh;
   overflow-y:auto;
-  font-size:0.96rem; /* slightly calmer body text inside overlay */
+
+  display:flex;
+  flex-direction:column;
+  padding:26px 28px 24px;
+  font-size:0.96rem;
 }
 
 /* Header / progress */
 .audit-header{
   position:relative;
   margin-bottom:20px;
-  padding-right:48px;   /* NEW: keeps step text away from the close button */
+  padding-right:48px;
 }
 
 .audit-header-top{
@@ -796,35 +821,112 @@ summary::marker{content:"";}
   background:#ece3d6;
 }
 
-/* Steps */
-.audit-form{ padding-top:4px; }
+/* Card around the flip-book */
+.audit-form{
+  position:relative;
+  margin-top:12px;
+  padding:0;
+  border-radius:20px;
+  background:#fdfbf6;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.08),
+    0 0 0 1px rgba(0,0,0,0.03);
+  display:flex;
 
-.audit-step{
-  display:none;
-  opacity:0;
-  transform:translateY(8px);
-  transition:opacity .25s ease, transform .25s ease;
-}
-.audit-step.is-active{
-  display:block;
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* Softer overlay headings */
-.audit-step h2{
-  font-size:clamp(1.4rem, 2.1vw, 1.8rem);
-  font-weight:600;
-  line-height:1.25;
+  /* Single-sheet flip behaviour */
+  perspective:1400px;
+  transform-style:preserve-3d;
+  overflow:hidden;
 }
 
-/* Intro layout */
+/* Subtle stacked pages under the card */
+.audit-form::before,
+.audit-form::after{
+  content:"";
+  position:absolute;
+  left:10px;
+  right:10px;
+  border-radius:20px;
+  background:#f3ece2;
+  box-shadow:0 14px 32px rgba(0,0,0,0.06);
+  z-index:-1;
+}
+.audit-form::before{ top:8px; }
+.audit-form::after{ top:16px; opacity:0.8; }
+
+/* Book viewport */
+.flip-book{
+  position:relative;
+  width:100%;
+  max-width:100%;
+  margin:0;
+}
+
+/* Each page = single clean sheet */
+.audit-step.page{
+  box-sizing:border-box;
+  padding:32px 80px 26px;
+  font-size:0.96rem;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  backface-visibility:hidden;
+  transform-origin:left center;
+}
+
+/* Incoming/outgoing states for JS */
+.audit-step.page.page-incoming{
+  animation:pageFlipIn 0.55s ease forwards;
+  transform-origin:right center;
+}
+.audit-step.page.page-flip-out{
+  animation:pageFlipOut 0.55s ease forwards;
+  transform-origin:left center;
+}
+
+/* Notebook-like flip animations */
+@keyframes pageFlipOut{
+  from{
+    transform:rotateY(0deg);
+    opacity:1;
+  }
+  to{
+    transform:rotateY(-90deg);
+    opacity:0;
+  }
+}
+
+@keyframes pageFlipIn{
+  from{
+    transform:rotateY(90deg);
+    opacity:0;
+  }
+  to{
+    transform:rotateY(0deg);
+    opacity:1;
+  }
+}
+
+/* nav row at bottom of page */
+.nav-row{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:26px;
+  padding-top:14px;
+  border-top:1px solid var(--ring);
+}
+
+/* Intro 2-column layout */
 .step-layout{
   display:grid;
   grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
   gap:24px;
   align-items:stretch;
 }
+
 .step-copy h1{ margin-bottom:10px; }
 .lead{ margin:0 0 10px; }
 .small-text{ font-size:.9rem; }
@@ -872,7 +974,6 @@ summary::marker{content:"";}
   margin-bottom:6px;
   color:var(--ink);
 }
-/* required asterisk */
 .field-label.required::after{
   content:" *";
   color:#d86868;
@@ -894,7 +995,7 @@ summary::marker{content:"";}
   font-family:inherit;
   color:var(--ink);
   background:#f9f6f1;
-  transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  transition:border-color .15s ease, box-shadow .15s ease, background .15s.ease;
 }
 .field textarea{
   resize:vertical;
@@ -939,7 +1040,7 @@ summary::marker{content:"";}
   transition:
     background .18s ease,
     border-color .18s ease,
-    box-shadow .18s.ease,
+    box-shadow .18s ease,
     transform .1s ease;
 }
 .choice-grid button:hover,
@@ -973,14 +1074,25 @@ summary::marker{content:"";}
 }
 .upload-label input[type="file"]{ display:none; }
 
-/* Nav row */
-.nav-row{
+/* Thank-you state */
+.audit-thanks{
+  display:none;
+  padding-top:8px;
+  text-align:left;
+}
+.audit-thanks.is-visible{
+  display:block;
+}
+.audit-thanks h2{
+  margin-bottom:8px;
+}
+.audit-thanks p{
+  margin:0 0 8px;
+}
+.audit-thanks .btn-row{
+  margin-top:18px;
   display:flex;
-  justify-content:flex-end;
   gap:10px;
-  margin-top:26px;
-  padding-top:14px;
-  border-top:1px solid var(--ring);
 }
 
 /* Responsive overlay */
@@ -990,9 +1102,14 @@ summary::marker{content:"";}
     padding:20px 16px 16px;
     border-radius:22px;
   }
+}
+
+@media (max-width:900px){
+  .audit-step.page{
+    padding:24px 20px 20px;
+  }
   .step-layout{
     grid-template-columns:1fr;
-    gap:18px;
   }
   .nav-row{
     flex-direction:row-reverse;
@@ -1000,35 +1117,14 @@ summary::marker{content:"";}
   }
 }
 
-/* === Audit thank-you state === */
-.audit-thanks{
-  display:none;
-  padding-top:8px;
-  text-align:left;
+/* Hide inner overlay scrollbar but keep scroll behaviour */
+.audit-overlay-shell::-webkit-scrollbar{
+  width:0;
+  height:0;
 }
-.audit-thanks.is-visible{
-  display:block;
+.audit-overlay-shell{
+  scrollbar-width:none;   /* Firefox */
 }
-
-.audit-thanks h2{
-  margin-bottom:8px;
-}
-.audit-thanks p{
-  margin:0 0 8px;
-}
-
-.audit-thanks .btn-row{
-  margin-top:18px;
-  display:flex;
-  gap:10px;
-}
-
-
-
-
-
-
-
 
 /* ===== Footer ===== */
 .footer{
@@ -1124,7 +1220,7 @@ summary::marker{content:"";}
   background:#222;
 }
 
-/* Responsive */
+/* Responsive footer */
 @media(max-width:700px){
   .foot-right{
     align-items:flex-start;
@@ -1133,3 +1229,4 @@ summary::marker{content:"";}
     justify-content:flex-start;
   }
 }
+
